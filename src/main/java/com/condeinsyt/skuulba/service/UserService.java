@@ -50,7 +50,7 @@ public class UserService {
                 return responseData;
             }
             responseData.put("data",allUsers);
-            responseData.put("message","User added successfully");
+            responseData.put("message","Listing all users");
             responseData.put("status",HttpStatus.OK.value());
         }catch(Exception e){
             e.printStackTrace();
