@@ -1,7 +1,7 @@
 package com.condeinsyt.skuulba.controller;
 
 import com.condeinsyt.skuulba.model.User;
-import com.condeinsyt.skuulba.service.AuthService;
+import com.condeinsyt.skuulba.service.AuthServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +16,10 @@ import javax.validation.Valid;
 @RequestMapping("/api/v1/auth/")
 public class AuthController {
 
-    private AuthService authService;
+    private AuthServiceImpl authService;
 
     @Autowired
-    public AuthController(AuthService authService){
+    public AuthController(AuthServiceImpl authService){
         this.authService = authService;
     }
 

@@ -11,12 +11,12 @@ import java.util.HashMap;
 import java.util.Optional;
 
 @Service
-public class AuthService {
+public class AuthServiceImpl {
 
     private AuthRepository authRepository;
 
     @Autowired
-    public AuthService(AuthRepository authRepository){
+    public AuthServiceImpl(AuthRepository authRepository){
         this.authRepository = authRepository;
     }
 
