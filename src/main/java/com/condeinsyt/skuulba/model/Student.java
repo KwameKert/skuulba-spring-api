@@ -14,7 +14,7 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long id;
 
-    private String firstName;
+
     private String lastName;
     private String otherNames;
     private String motherTongue;
@@ -22,6 +22,7 @@ public class Student {
     private String livingWith;
     private Integer noSiblings;
     private Date dob;
+    private String studentClass;
     private String[] languages;
     private String religion;
     private String gender;
@@ -33,6 +34,14 @@ public class Student {
 
     public Date getUpdatedAt() {
         return updatedAt;
+    }
+
+    public String getStudentClass() {
+        return studentClass;
+    }
+
+    public void setStudentClass(String studentClass) {
+        this.studentClass = studentClass;
     }
 
     public void setUpdatedAt(Date updatedAt) {
@@ -47,13 +56,7 @@ public class Student {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName.toLowerCase();
-    }
 
     public String getLastName() {
         return lastName;
@@ -152,7 +155,6 @@ public class Student {
     public String toString() {
         return "Student{" +
                 "id=" + id +
-                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", otherNames='" + otherNames + '\'' +
                 ", motherTongue='" + motherTongue + '\'' +

@@ -13,15 +13,15 @@ class StudentTest {
     @Test
     void getFirstName() {
         Student newStudent = new Student();
-        newStudent.setFirstName("Kofi");
-        assertEquals("kofi", newStudent.getFirstName());
+        newStudent.setStudentClass("Kofi");
+        assertEquals("kofi", newStudent.getStudentClass());
     }
 
     @Test
     void setFirstName() {
         Student newStudent = new Student();
-        newStudent.setFirstName("Kofi");
-        assertEquals("kofi", newStudent.getFirstName());
+        newStudent.setStudentClass("Kofi");
+        assertEquals("kofi", newStudent.getStudentClass());
     }
 
     @Test

@@ -55,7 +55,6 @@ public class StudentServiceImpl implements StudentService {
             }
 
             Student oldStudent = studentFound.get();
-            oldStudent.setFirstName(student.getFirstName());
             oldStudent.setLastName(student.getLastName());
             oldStudent.setOtherNames(student.getOtherNames());
             oldStudent.setMotherTongue(student.getMotherTongue());
