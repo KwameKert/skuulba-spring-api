@@ -52,6 +52,7 @@ public class UserServiceImpl implements UserService {
                 responseData.put("status",HttpStatus.NO_CONTENT.value());
                 return responseData;
             }
+            System.out.println(allUsers);
             responseData.put("data",allUsers);
             responseData.put("message","Listing all users");
             responseData.put("status",HttpStatus.OK.value());
