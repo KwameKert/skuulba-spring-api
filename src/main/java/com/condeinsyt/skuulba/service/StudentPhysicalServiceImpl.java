@@ -109,7 +109,7 @@ public class StudentPhysicalServiceImpl implements StudentPhysicalService {
             List<StudentPhysical> studentPhysicalList = studentPhysicalRepository.findByStudentId(id);
             if (studentPhysicalList.isEmpty()) {
                 responseData.put("data", Collections.EMPTY_LIST);
-                responseData.put("message", "Student physique found \uD83E\uDD7A");
+                responseData.put("message", "Student physique not found \uD83E\uDD7A");
                 responseData.put("status", HttpStatus.NO_CONTENT.value());
                 return responseData;
             }

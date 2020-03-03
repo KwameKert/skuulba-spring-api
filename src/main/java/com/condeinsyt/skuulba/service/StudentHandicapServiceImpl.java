@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class StudentHandicapServiceImpl implements StudentHandicapService {
@@ -18,11 +15,20 @@ public class StudentHandicapServiceImpl implements StudentHandicapService {
     private StudentHandicapRepository studentHandicapRepository;
 
 
+
     @Autowired
     public StudentHandicapServiceImpl(StudentHandicapRepository studentHandicapRepository) {
         this.studentHandicapRepository = studentHandicapRepository;
     }
 
+    public HashMap<String, Object> responseAPI(Object data, String message, HttpStatus status){
+        HashMap<String, Object> responseData = new HashMap<>();
+        responseData.put("data",data);
+        responseData.put("message",message);
+        responseData.put("status", status.value());
+
+        return responseData;
+    }
     @Override
     public HashMap<String, Object> createHandicap(StudentHandicapDTO studentHandicapDTO) {
         HashMap<String, Object> responseData = new HashMap<>();
@@ -108,11 +114,31 @@ public class StudentHandicapServiceImpl implements StudentHandicapService {
 
     @Override
     public HashMap<String, Object> listStudentHandicap(Long id) {
-        return null;
+        try {
+            List<StudentHandicap> studentHandicapList = studentHandicapRepository.findByStudentId(id);
+            if (studentHandicapList.isEmpty()) {
+                return responseAPI(Collections.EMPTY_LIST,"Student Handicap not found \uD83E\uDD7A", HttpStatus.NO_CONTENT);
+            }
+            return responseAPI(studentHandicapList,"Student handicap found \uD83E\uDD7A",HttpStatus.OK);
+        }catch(Exception e){
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
     }
 
     @Override
     public HashMap<String, Object> findStudentHandicapById(Long id) {
-        return null;
+
+        try {
+            Optional<StudentHandicap> studentHandicap  = studentHandicapRepository.findById(id);
+
+            if(studentHandicap.isPresent()){
+                return responseAPI(Collections.EMPTY_LIST,"Student Handicap not found \uD83E\uDD7A", HttpStatus.NO_CONTENT);
+            }
+
+            return responseAPI(studentHandicap,"Student handicap found \uD83E\uDD7A",HttpStatus.OK);
+
+        }catch(Exception e){
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
     }
 }
