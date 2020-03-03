@@ -82,7 +82,7 @@ public class StudentPhysicalServiceImpl implements StudentPhysicalService {
         try{
 
             Optional<StudentPhysical> studentPhysicalFound = studentPhysicalRepository.findById(id);
-            Long studId = studentPhysicalFound.get().getId();
+            Long studId = studentPhysicalFound.get().getStudentId();
 
             if(!studentPhysicalFound.isPresent()){
                 responseData.put("data", Collections.EMPTY_LIST);
@@ -91,7 +91,7 @@ public class StudentPhysicalServiceImpl implements StudentPhysicalService {
                 return responseData;
             }
             studentPhysicalRepository.deleteById(id);
-            findStudentPhysicalById(studId);
+            listStudentPhysical(studId);
         } catch(Exception e){
             e.printStackTrace();
             responseData.put("data",null);
