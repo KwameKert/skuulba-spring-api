@@ -9,9 +9,7 @@ public class StudentAwardDTO {
 
     private ArrayList<StudentAward> awards;
 
-    public StudentAwardDTO(ArrayList<StudentAward> awards) {
-        this.awards = awards;
-    }
+
 
 
     public ArrayList<StudentAward> getAwards() {

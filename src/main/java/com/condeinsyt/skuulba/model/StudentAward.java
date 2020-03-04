@@ -16,10 +16,10 @@ public class StudentAward {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Long studId;
+    private Long studentId;
     private Date date;
     private String awardName;
-    private String remarks;
+    private String remark;
 
     @CreationTimestamp
     private Date createdAt;
@@ -30,11 +30,11 @@ public class StudentAward {
     public StudentAward() {
     }
 
-    public StudentAward(Long studId, Date date, String awardName, String remarks, Date createdAt, Date updatedAt) {
-        this.studId = studId;
+    public StudentAward(Long studentId, Date date, String awardName, String remark, Date createdAt, Date updatedAt) {
+        this.studentId = studentId;
         this.date = date;
         this.awardName = awardName;
-        this.remarks = remarks;
+        this.remark = remark;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -48,12 +48,12 @@ public class StudentAward {
         this.id = id;
     }
 
-    public Long getStudId() {
-        return studId;
+    public Long getstudentId() {
+        return studentId;
     }
 
-    public void setStudId(Long studId) {
-        this.studId = studId;
+    public void setstudentId(Long studentId) {
+        this.studentId = studentId;
     }
 
     public Date getDate() {
@@ -72,12 +72,12 @@ public class StudentAward {
         this.awardName = awardName;
     }
 
-    public String getRemarks() {
-        return remarks;
+    public String getremark() {
+        return remark;
     }
 
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
+    public void setremark(String remark) {
+        this.remark = remark;
     }
 
     public Date getCreatedAt() {
@@ -101,10 +101,10 @@ public class StudentAward {
     public String toString() {
         return "StudentAwardDTO{" +
                 "id=" + id +
-                ", studId=" + studId +
+                ", studentId=" + studentId +
                 ", date=" + date +
                 ", awardName='" + awardName + '\'' +
-                ", remarks='" + remarks + '\'' +
+                ", remark='" + remark + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';
