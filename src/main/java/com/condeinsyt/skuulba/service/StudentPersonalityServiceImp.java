@@ -89,7 +89,7 @@ public class StudentPersonalityServiceImp implements StudentPersonalityService {
                 return responseData;
             }
             studentPersonalityRepository.deleteById(id);
-            findStudentPersonalityById(pId);
+            return findStudentPersonalityById(pId);
         } catch(Exception e){
             e.printStackTrace();
             responseData.put("data",null);

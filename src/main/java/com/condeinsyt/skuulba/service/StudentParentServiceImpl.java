@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import javax.swing.tree.ExpandVetoException;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StudentParentServiceImpl implements StudentParentService {
@@ -20,6 +22,20 @@ public class StudentParentServiceImpl implements StudentParentService {
     public StudentParentServiceImpl(StudentParentRepository studentParentRepository){
         this.studentParentRepository = studentParentRepository;
     }
+
+
+
+    public HashMap<String, Object> responseAPI(Object data, String message, HttpStatus status){
+        HashMap<String, Object> responseData = new HashMap<>();
+        responseData.put("data",data);
+        responseData.put("message",message);
+        responseData.put("status", status.value());
+
+        return responseData;
+    }
+
+
+
     @Override
     public HashMap<String, Object> createStudentParent(StudentParent studentParent) {
 
@@ -44,12 +60,36 @@ public class StudentParentServiceImpl implements StudentParentService {
 
     @Override
     public HashMap<String, Object> updateStudentParent(StudentParent studentParent) {
-        return null;
+        try{
+
+            Optional<StudentParent> studentParentFound = this.studentParentRepository.findById(studentParent.getId());
+            if(!studentParentFound.isPresent()){
+                return responseAPI(null,"Student parent not found",HttpStatus.NO_CONTENT);
+            }
+
+            StudentParent updateParent = this.studentParentRepository.save(studentParent);
+            return responseAPI(updateParent,"Student parent updated successfully",HttpStatus.OK);
+
+        }catch(Exception e){
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
     }
 
     @Override
-    public HashMap<String, Object> listStudentParent() {
-        return null;
+    public HashMap<String, Object> listStudentParent(Long id) {
+        try{
+            List<StudentParent> listStudentParent = this.studentParentRepository.findByStudentId(id);
+
+            if(listStudentParent.isEmpty()){
+                return responseAPI(null,"No student parent found",HttpStatus.NO_CONTENT);
+            }
+
+            return responseAPI(listStudentParent,"Student parents found",HttpStatus.OK);
+
+        }catch(Exception e){
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
+
     }
 
     @Override

@@ -5,10 +5,7 @@ import com.condeinsyt.skuulba.dto.StudentEducationDTO;
 import com.condeinsyt.skuulba.service.StudentEducationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -26,6 +23,11 @@ public class StudentEducationController {
     @PostMapping
     public ResponseEntity<?> addEducation(@Valid @RequestBody StudentEducationDTO studentEducationDTO) {
         return new ResponseEntity<>(studentEducationService.createEducation(studentEducationDTO), HttpStatus.OK);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable("id") long id){
+        return new ResponseEntity<>(studentEducationService.deleteEducation(id),HttpStatus.OK);
     }
 
 

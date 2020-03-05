@@ -1,7 +1,8 @@
 package com.condeinsyt.skuulba.service;
 
-import com.condeinsyt.skuulba.model.Student;
-import com.condeinsyt.skuulba.repository.StudentRepository;
+import com.condeinsyt.skuulba.dto.GetStudentDetailsDTO;
+import com.condeinsyt.skuulba.model.*;
+import com.condeinsyt.skuulba.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -15,11 +16,41 @@ import java.util.Optional;
 public class StudentServiceImpl implements StudentService {
 
     private StudentRepository studentRepository;
+    private StudentParentRepository studentParentRepository;
+    private StudentHealthRepository studentHealthRepository;
+    private StudentEducationRepository studentEducationRepository;
+    private StudentAwardRepository studentAwardRepository;
+    private StudentHandicapRepository studentHandicapRepository;
+    private StudentTalentRepository studentTalentRepository;
+    private StudentPersonalityRepository studentPersonalityRepository;
+    private StudentPhysicalRepository studentPhysicalRepository;
 
     @Autowired
-    public StudentServiceImpl(StudentRepository studentRepository){
+    public StudentServiceImpl(StudentRepository studentRepository, StudentParentRepository studentParentRepository, StudentHealthRepository studentHealthRepository, StudentEducationRepository studentEducationRepository, StudentAwardRepository studentAwardRepository, StudentHandicapRepository studentHandicapRepository, StudentTalentRepository studentTalentRepository, StudentPersonalityRepository studentPersonalityRepository, StudentPhysicalRepository studentPhysicalRepository) {
         this.studentRepository = studentRepository;
+        this.studentParentRepository = studentParentRepository;
+        this.studentHealthRepository = studentHealthRepository;
+        this.studentEducationRepository = studentEducationRepository;
+        this.studentAwardRepository = studentAwardRepository;
+        this.studentHandicapRepository = studentHandicapRepository;
+        this.studentTalentRepository = studentTalentRepository;
+        this.studentPersonalityRepository = studentPersonalityRepository;
+        this.studentPhysicalRepository = studentPhysicalRepository;
     }
+
+
+
+
+    public HashMap<String, Object> responseAPI(Object data, String message, HttpStatus status){
+        HashMap<String, Object> responseData = new HashMap<>();
+        responseData.put("data",data);
+        responseData.put("message",message);
+        responseData.put("status", status.value());
+
+        return responseData;
+    }
+
+
 
     @Override
     public HashMap<String, Object> createStudent(Student student) {
@@ -54,15 +85,7 @@ public class StudentServiceImpl implements StudentService {
                 return responseData;
             }
 
-            Student oldStudent = studentFound.get();
-            oldStudent.setLastName(student.getLastName());
-            oldStudent.setOtherNames(student.getOtherNames());
-            oldStudent.setMotherTongue(student.getMotherTongue());
-            oldStudent.setHomeTown(student.getHomeTown());
-            oldStudent.setDob(student.getDob());
-            oldStudent.setLivingWith(student.getLivingWith());
-
-            Student updatedStudent  = studentRepository.save(oldStudent);
+            Student updatedStudent  = studentRepository.save(student);
             responseData.put("data",updatedStudent);
             responseData.put("message","Student updated successfully");
             responseData.put("status",HttpStatus.OK.value());
@@ -151,4 +174,74 @@ public class StudentServiceImpl implements StudentService {
 
         return responseData;
     }
+
+
+    @Override
+    public HashMap<String, Object> getStudentDetails(Long id){
+        try{
+            Optional<Student> student = studentRepository.findById(id);
+            List<StudentAward> studentAward = studentAwardRepository.findByStudentId(id);
+            Optional<StudentHealth> studentHealth  = studentHealthRepository.findByStudentId(id);
+            List<StudentPersonality> studentPersonality = studentPersonalityRepository.findByStudentId(id);
+            List<StudentTalent> studentTalent = studentTalentRepository.findByStudentId(id);
+            List<StudentEducation> studentEducation = studentEducationRepository.findByStudentId(id);
+            List<StudentPhysical> studentPhysical = studentPhysicalRepository.findByStudentId(id);
+            List<StudentParent> studentParents = studentParentRepository.findByStudentId(id);
+            List<StudentHandicap> studentHandicaps = studentHandicapRepository.findByStudentId(id);
+
+            GetStudentDetailsDTO studentDetails = new GetStudentDetailsDTO();
+            student.ifPresent(studentDetails::setStudent);
+
+        studentHealth.ifPresent(studentDetails::setStudentHealth);
+
+            if(!studentAward.isEmpty()){
+                studentDetails.setStudentAward(studentAward);
+            }
+
+            if(!studentEducation.isEmpty()){
+                studentDetails.setStudentEducation(studentEducation);
+            }
+            if(!studentPersonality.isEmpty()){
+                studentDetails.setStudentPersonalities(studentPersonality);
+            }
+
+            if(!studentHandicaps.isEmpty()){
+                studentDetails.setStudentHandicap(studentHandicaps);
+            }
+
+            if(!studentPhysical.isEmpty()){
+                studentDetails.setStudentPhysical(studentPhysical);
+            }
+
+            if(!studentTalent.isEmpty()){
+                studentDetails.setStudentTalent(studentTalent);
+            }
+
+            if(!studentParents.isEmpty()){
+                studentDetails.setStudentParent(studentParents);
+            }
+
+            return responseAPI(studentDetails,"Student physique found \uD83D\uDE42",HttpStatus.OK);
+
+        }catch(Exception e){
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+
+        }
+    }
+
+    @Override
+    public HashMap<String, Object> searchStudentDetails() {
+        try{
+            List<Student> allStudents = studentRepository.findAll();
+            if(!allStudents.isEmpty()){
+                return responseAPI(null,"Student not found \uD83E\uDD7A",HttpStatus.NO_CONTENT);
+            }else{
+                return responseAPI(allStudents,"Students found \uD83D\uDE42",HttpStatus.OK);
+            }
+        }catch(Exception e){
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
+    }
+
+
 }

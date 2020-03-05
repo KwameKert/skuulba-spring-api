@@ -91,7 +91,7 @@ public class StudentPhysicalServiceImpl implements StudentPhysicalService {
                 return responseData;
             }
             studentPhysicalRepository.deleteById(id);
-            listStudentPhysical(studId);
+           return listStudentPhysical(studId);
         } catch(Exception e){
             e.printStackTrace();
             responseData.put("data",null);

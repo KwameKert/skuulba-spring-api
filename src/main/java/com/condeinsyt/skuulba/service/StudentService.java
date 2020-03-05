@@ -15,4 +15,6 @@ public interface StudentService {
     HashMap<String, Object>  findStudentById(Long studId);
 
     HashMap<String, Object> deleteStudent(Long studId);
+    HashMap<String, Object> getStudentDetails(Long id);
+    HashMap<String, Object> searchStudentDetails();
 }

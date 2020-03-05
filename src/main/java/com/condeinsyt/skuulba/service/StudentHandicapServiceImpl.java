@@ -101,7 +101,7 @@ public class StudentHandicapServiceImpl implements StudentHandicapService {
                 return responseData;
             }
             studentHandicapRepository.deleteById(id);
-            listStudentHandicap(studId);
+           return listStudentHandicap(studId);
         } catch(Exception e){
             e.printStackTrace();
             responseData.put("data",null);

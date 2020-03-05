@@ -49,5 +49,11 @@ public class StudentController {
       return new ResponseEntity<>(this.studentService.deleteStudent(id), HttpStatus.OK);
     }
 
+    @GetMapping("studentDetails/{id}")
+    public ResponseEntity<?> getStudentDetails(@PathVariable("id") Long id){
+        System.out.println( id);
+        return new ResponseEntity<>(this.studentService.getStudentDetails(id),HttpStatus.OK);
+    }
+
 
 }

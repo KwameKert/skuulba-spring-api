@@ -83,14 +83,15 @@ public class StudentEducationServiceImpl implements StudentEducationService {
             Optional<StudentEducation> studentEducationFound = studentEducationRepository.findById(id);
             Long studId = studentEducationFound.get().getStudentId();
 
-            if(!studentEducationFound.isPresent()){
-                responseData.put("data", Collections.EMPTY_LIST);
-                responseData.put("message","Student Education not found \uD83E\uDD7A");
-                responseData.put("status",HttpStatus.NO_CONTENT.value());
-                return responseData;
-            }
+
+//            if(!studentEducationFound.isPresent()){
+//                responseData.put("data", Collections.EMPTY_LIST);
+//                responseData.put("message","Student Education not found \uD83E\uDD7A");
+//                responseData.put("status",HttpStatus.NO_CONTENT.value());
+//                return responseData;
+//            }
             studentEducationRepository.deleteById(id);
-            findStudentEducationById(studId);
+            return findStudentEducationById(studId);
         } catch(Exception e){
             e.printStackTrace();
             responseData.put("data",null);

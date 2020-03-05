@@ -88,7 +88,7 @@ public class StudentAwardServiceImpl implements StudentAwardService {
         try{
 
             List<StudentAward> studentAwards = studentAwardRepository.findByStudentId(id);
-            if(!studentAwards.isEmpty()){
+            if(studentAwards.isEmpty()){
                 return responseAPI(null,"Student awards not found \uD83E\uDD7A",HttpStatus.NO_CONTENT);
             }
 
