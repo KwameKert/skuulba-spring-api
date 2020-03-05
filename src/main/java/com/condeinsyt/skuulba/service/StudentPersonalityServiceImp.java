@@ -104,7 +104,7 @@ public class StudentPersonalityServiceImp implements StudentPersonalityService {
     public HashMap<String, Object> listStudentPersonality(Long id) {
         HashMap<String, Object> responseData = new HashMap<>();
         try {
-            List<StudentPersonality> studentPersonalityList = studentPersonalityRepository.findByStudentId(id);
+            List<StudentPersonality> studentPersonalityList = studentPersonalityRepository.findAllByStudentId(id);
             if (studentPersonalityList.isEmpty()) {
                 responseData.put("data", Collections.EMPTY_LIST);
                 responseData.put("message", "Student personality found \uD83E\uDD7A");

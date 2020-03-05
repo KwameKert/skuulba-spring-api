@@ -106,7 +106,7 @@ public class StudentPhysicalServiceImpl implements StudentPhysicalService {
     public HashMap<String, Object> listStudentPhysical(Long id) {
         HashMap<String, Object> responseData = new HashMap<>();
         try {
-            List<StudentPhysical> studentPhysicalList = studentPhysicalRepository.findByStudentId(id);
+            List<StudentPhysical> studentPhysicalList = studentPhysicalRepository.findAllByStudentId(id);
             if (studentPhysicalList.isEmpty()) {
                 responseData.put("data", Collections.EMPTY_LIST);
                 responseData.put("message", "Student physique not found \uD83E\uDD7A");

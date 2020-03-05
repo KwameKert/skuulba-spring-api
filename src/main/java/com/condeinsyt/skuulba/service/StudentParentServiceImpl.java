@@ -78,7 +78,7 @@ public class StudentParentServiceImpl implements StudentParentService {
     @Override
     public HashMap<String, Object> listStudentParent(Long id) {
         try{
-            List<StudentParent> listStudentParent = this.studentParentRepository.findByStudentId(id);
+            List<StudentParent> listStudentParent = this.studentParentRepository.findAllByStudentId(id);
 
             if(listStudentParent.isEmpty()){
                 return responseAPI(null,"No student parent found",HttpStatus.NO_CONTENT);

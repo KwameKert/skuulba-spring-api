@@ -26,11 +26,32 @@ public class Student {
     private String[] languages;
     private String religion;
     private String gender;
+
+    @Lob
+    private byte[] pic;
     @CreationTimestamp
     private Date createdAt;
 
     @UpdateTimestamp
     private Date updatedAt;
+
+    public Student(String lastName, String otherNames, String motherTongue, String homeTown, String livingWith, Integer noSiblings, Date dob, String studentClass, String[] languages, String religion, String gender, byte[] pic, Date createdAt, Date updatedAt) {
+        this.lastName = lastName;
+        this.otherNames = otherNames;
+        this.motherTongue = motherTongue;
+        this.homeTown = homeTown;
+        this.livingWith = livingWith;
+        this.noSiblings = noSiblings;
+        this.dob = dob;
+        this.studentClass = studentClass;
+        this.languages = languages;
+        this.religion = religion;
+        this.gender = gender;
+        this.pic = pic;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
 
     public Date getUpdatedAt() {
         return updatedAt;

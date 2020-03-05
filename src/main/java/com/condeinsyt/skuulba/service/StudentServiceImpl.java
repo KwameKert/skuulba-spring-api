@@ -180,14 +180,14 @@ public class StudentServiceImpl implements StudentService {
     public HashMap<String, Object> getStudentDetails(Long id){
         try{
             Optional<Student> student = studentRepository.findById(id);
-            List<StudentAward> studentAward = studentAwardRepository.findByStudentId(id);
+            List<StudentAward> studentAward = studentAwardRepository.findAllByStudentId(id);
             Optional<StudentHealth> studentHealth  = studentHealthRepository.findByStudentId(id);
-            List<StudentPersonality> studentPersonality = studentPersonalityRepository.findByStudentId(id);
-            List<StudentTalent> studentTalent = studentTalentRepository.findByStudentId(id);
-            List<StudentEducation> studentEducation = studentEducationRepository.findByStudentId(id);
-            List<StudentPhysical> studentPhysical = studentPhysicalRepository.findByStudentId(id);
-            List<StudentParent> studentParents = studentParentRepository.findByStudentId(id);
-            List<StudentHandicap> studentHandicaps = studentHandicapRepository.findByStudentId(id);
+            List<StudentPersonality> studentPersonality = studentPersonalityRepository.findAllByStudentId(id);
+            List<StudentTalent> studentTalent = studentTalentRepository.findAllByStudentId(id);
+            List<StudentEducation> studentEducation = studentEducationRepository.findAllByStudentId(id);
+            List<StudentPhysical> studentPhysical = studentPhysicalRepository.findAllByStudentId(id);
+            List<StudentParent> studentParents = studentParentRepository.findAllByStudentId(id);
+            List<StudentHandicap> studentHandicaps = studentHandicapRepository.findAllByStudentId(id);
 
             GetStudentDetailsDTO studentDetails = new GetStudentDetailsDTO();
             student.ifPresent(studentDetails::setStudent);
@@ -224,6 +224,7 @@ public class StudentServiceImpl implements StudentService {
             return responseAPI(studentDetails,"Student physique found \uD83D\uDE42",HttpStatus.OK);
 
         }catch(Exception e){
+            e.printStackTrace();
             return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
 
         }
@@ -239,6 +240,7 @@ public class StudentServiceImpl implements StudentService {
                 return responseAPI(allStudents,"Students found \uD83D\uDE42",HttpStatus.OK);
             }
         }catch(Exception e){
+            e.printStackTrace();
             return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
         }
     }

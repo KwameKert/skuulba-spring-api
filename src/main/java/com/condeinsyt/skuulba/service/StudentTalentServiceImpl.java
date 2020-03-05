@@ -84,7 +84,7 @@ public class StudentTalentServiceImpl implements StudentTalentService {
     public HashMap<String, Object> listStudentTalent(Long id) {
         try{
 
-            List<StudentTalent> studentTalents = studentTalentRepository.findByStudentId(id);
+            List<StudentTalent> studentTalents = studentTalentRepository.findAllByStudentId(id);
             if(!studentTalents.isEmpty()){
                 return responseAPI(null,"Student talents not found \uD83E\uDD7A",HttpStatus.NO_CONTENT);
             }

@@ -115,7 +115,7 @@ public class StudentHandicapServiceImpl implements StudentHandicapService {
     @Override
     public HashMap<String, Object> listStudentHandicap(Long id) {
         try {
-            List<StudentHandicap> studentHandicapList = studentHandicapRepository.findByStudentId(id);
+            List<StudentHandicap> studentHandicapList = studentHandicapRepository.findAllByStudentId(id);
             if (studentHandicapList.isEmpty()) {
                 return responseAPI(Collections.EMPTY_LIST,"Student Handicap not found \uD83E\uDD7A", HttpStatus.NO_CONTENT);
             }

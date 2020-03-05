@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface StudentPhysicalRepository extends JpaRepository<StudentPhysical,Long> {
 
-    List<StudentPhysical> findByStudentId(Long id);
+    List<StudentPhysical> findAllByStudentId(Long id);
 
 }

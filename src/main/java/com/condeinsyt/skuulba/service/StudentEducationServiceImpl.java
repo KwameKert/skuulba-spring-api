@@ -106,7 +106,7 @@ public class StudentEducationServiceImpl implements StudentEducationService {
     public HashMap<String, Object> listStudentEducation(Long id) {
         HashMap<String, Object> responseData = new HashMap<>();
         try {
-            List<StudentEducation> studentEducationList = studentEducationRepository.findByStudentId(id);
+            List<StudentEducation> studentEducationList = studentEducationRepository.findAllByStudentId(id);
             if (studentEducationList.isEmpty()) {
                 responseData.put("data", Collections.EMPTY_LIST);
                 responseData.put("message", "Student education not found \uD83E\uDD7A");

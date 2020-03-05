@@ -87,7 +87,7 @@ public class StudentAwardServiceImpl implements StudentAwardService {
     public HashMap<String, Object> listStudentAward(Long id) {
         try{
 
-            List<StudentAward> studentAwards = studentAwardRepository.findByStudentId(id);
+            List<StudentAward> studentAwards = studentAwardRepository.findAllByStudentId(id);
             if(studentAwards.isEmpty()){
                 return responseAPI(null,"Student awards not found \uD83E\uDD7A",HttpStatus.NO_CONTENT);
             }
