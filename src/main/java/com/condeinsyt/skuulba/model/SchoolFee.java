@@ -1,28 +1,24 @@
 package com.condeinsyt.skuulba.model;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name="app_student_daily_fees")
-public class DailyFees {
-
+@Table(name="app_student_school_fees")
+public class SchoolFee implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id ;
-
-
-    private String type;
+    private Long id;
     private int amount;
     private String fullName;
-    private String gender;
     private String studentClass;
-
+    private String gender;
     @CreationTimestamp
     private Date createdAt;
     @UpdateTimestamp
@@ -33,41 +29,16 @@ public class DailyFees {
     private Student student;
 
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getGender() {
-        return student.getGender();
-    }
-
     public String getFullName() {
-        return student.getLastName().toUpperCase()+ " "+ student.getOtherNames().toUpperCase();
+        return StringUtils.capitalize(student.getLastName()) + " " + StringUtils.capitalize(student.getOtherNames());
     }
-
 
 
     public String getStudentClass() {
-        return student.getStudentClass().toUpperCase();
+        return StringUtils.capitalize(student.getStudentClass());
     }
 
-    public void setStudentClass(String studentClass) {
-        this.studentClass = studentClass;
-    }
 
-    @JsonIgnore
-    public Student getStudent() {
-        return student;
-    }
-
-    @JsonIgnore
-    public void setStudent(Student student) {
-        this.student = student;
-    }
 
     public Long getId() {
         return id;
@@ -77,22 +48,19 @@ public class DailyFees {
         this.id = id;
     }
 
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public int getAmount() {
         return amount;
+    }
+
+    public String getGender() {
+        return student.getGender();
     }
 
     public void setAmount(int amount) {
         this.amount = amount;
     }
+
+
 
     public Date getCreatedAt() {
         return createdAt;
@@ -102,23 +70,20 @@ public class DailyFees {
         this.createdAt = createdAt;
     }
 
+    @JsonIgnore
+    public Student getStudent() {
+        return student;
+    }
+    @JsonIgnore
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
     public Date getUpdatedAt() {
         return updatedAt;
     }
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-
-    @Override
-    public String toString() {
-        return "DailyFees{" +
-                "id=" + id +
-                ", type='" + type + '\'' +
-                ", amount=" + amount +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                '}';
     }
 }

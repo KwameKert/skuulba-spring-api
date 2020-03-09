@@ -1,14 +1,12 @@
 package com.condeinsyt.skuulba.controller;
 
+import com.condeinsyt.skuulba.dto.DailyFeeDTO;
 import com.condeinsyt.skuulba.model.DailyFees;
 import com.condeinsyt.skuulba.service.DailyFeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -24,7 +22,16 @@ public class DailyFeeController {
     }
 
     @PostMapping
-    public ResponseEntity<?> takeFee(@Valid @RequestBody DailyFees dailyFees) {
-        return new ResponseEntity<>(dailyFeeService.addFee(dailyFees), HttpStatus.OK);
+    public ResponseEntity<?> takeFee(@Valid @RequestBody DailyFeeDTO dailyFeeDTO ) {
+        return new ResponseEntity<>(dailyFeeService.addFee(dailyFeeDTO), HttpStatus.OK);
     }
+
+
+    @GetMapping
+    public ResponseEntity<?> listFee() {
+        return new ResponseEntity<>(dailyFeeService.listFees(), HttpStatus.OK);
+    }
+
+
+
 }

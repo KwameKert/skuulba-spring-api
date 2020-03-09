@@ -1,11 +1,17 @@
 package com.condeinsyt.skuulba.model;
 
+
+import com.condeinsyt.skuulba.utils.AgeCalculator;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 
 import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="app_student")
@@ -26,6 +32,7 @@ public class Student {
     private String[] languages;
     private String religion;
     private String gender;
+    private int age;
 
     private String image_url;
     @CreationTimestamp
@@ -34,7 +41,36 @@ public class Student {
     @UpdateTimestamp
     private Date updatedAt;
 
+
+    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private List<SchoolFee> schoolFees;
+
+
+    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private List<DailyFees> dailyFees;
+
+
     public Student() {
+    }
+
+
+
+    public List<DailyFees> getDailyFees() {
+        return dailyFees;
+    }
+
+    public void setDailyFees(List<DailyFees> dailyFees) {
+        this.dailyFees = dailyFees;
+    }
+
+    public List<SchoolFee> getSchoolFees() {
+        return schoolFees;
+    }
+
+    public void setSchoolFees(List<SchoolFee> schoolFees) {
+        this.schoolFees = schoolFees;
     }
 
     public Student(String lastName, String otherNames, String motherTongue, String homeTown, String livingWith, Integer noSiblings, Date dob, String studentClass, String[] languages, String religion, String gender, String image_url, Date createdAt, Date updatedAt) {
@@ -67,11 +103,16 @@ public class Student {
     }
 
     public String getStudentClass() {
-        return studentClass;
+        return studentClass.toUpperCase();
+    }
+
+    public int getAge() {
+        return AgeCalculator.calculateAge(dob, new Date());
+
     }
 
     public void setStudentClass(String studentClass) {
-        this.studentClass = studentClass;
+        this.studentClass = studentClass.toLowerCase();
     }
 
     public void setUpdatedAt(Date updatedAt) {
@@ -89,7 +130,7 @@ public class Student {
 
 
     public String getLastName() {
-        return lastName;
+        return lastName.toUpperCase();
     }
 
     public void setLastName(String lastName) {
@@ -97,23 +138,23 @@ public class Student {
     }
 
     public String getReligion() {
-        return religion;
+        return religion.toUpperCase();
     }
 
     public void setReligion(String religion) {
-        this.religion = religion;
+        this.religion = religion.toLowerCase();
     }
 
     public String getGender() {
-        return gender;
+        return gender.toUpperCase();
     }
 
     public void setGender(String gender) {
-        this.gender = gender;
+        this.gender = gender.toLowerCase();
     }
 
     public String getOtherNames() {
-        return otherNames;
+        return otherNames.toUpperCase();
     }
 
     public void setOtherNames(String otherNames) {
@@ -121,7 +162,7 @@ public class Student {
     }
 
     public String getMotherTongue() {
-        return motherTongue;
+        return motherTongue.toUpperCase();
     }
 
     public void setMotherTongue(String motherTongue) {
@@ -129,7 +170,7 @@ public class Student {
     }
 
     public String getHomeTown() {
-        return homeTown;
+        return homeTown.toLowerCase();
     }
 
     public void setHomeTown(String homeTown) {
@@ -137,7 +178,7 @@ public class Student {
     }
 
     public String getLivingWith() {
-        return livingWith;
+        return livingWith.toUpperCase();
     }
 
     public void setLivingWith(String livingWith) {

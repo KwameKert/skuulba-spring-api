@@ -107,6 +107,7 @@ public class StudentServiceImpl implements StudentService {
         HashMap<String, Object> responseData = new HashMap<>();
         try{
             List<Student> studentList = studentRepository.findAll();
+            //System.out.println(studentList.get(0).getDob());
             if(studentList.isEmpty()){
                 responseData.put("data", Collections.EMPTY_LIST);
                 responseData.put("message","Students not found \uD83E\uDD7A");
