@@ -60,8 +60,10 @@ public class StudentParentServiceImpl implements StudentParentService {
 
     @Override
     public HashMap<String, Object> updateStudentParent(StudentParent studentParent) {
+        if ( studentParent.getId() == null){
+            return this.createStudentParent(studentParent);
+        }
         try{
-
             Optional<StudentParent> studentParentFound = this.studentParentRepository.findById(studentParent.getId());
             if(!studentParentFound.isPresent()){
                 return responseAPI(null,"Student parent not found",HttpStatus.NO_CONTENT);

@@ -27,15 +27,17 @@ public class Student {
     private String religion;
     private String gender;
 
-    @Lob
-    private byte[] pic;
+    private String image_url;
     @CreationTimestamp
     private Date createdAt;
 
     @UpdateTimestamp
     private Date updatedAt;
 
-    public Student(String lastName, String otherNames, String motherTongue, String homeTown, String livingWith, Integer noSiblings, Date dob, String studentClass, String[] languages, String religion, String gender, byte[] pic, Date createdAt, Date updatedAt) {
+    public Student() {
+    }
+
+    public Student(String lastName, String otherNames, String motherTongue, String homeTown, String livingWith, Integer noSiblings, Date dob, String studentClass, String[] languages, String religion, String gender, String image_url, Date createdAt, Date updatedAt) {
         this.lastName = lastName;
         this.otherNames = otherNames;
         this.motherTongue = motherTongue;
@@ -47,11 +49,18 @@ public class Student {
         this.languages = languages;
         this.religion = religion;
         this.gender = gender;
-        this.pic = pic;
+        this.image_url = image_url;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
 
+    public String getImage_url() {
+        return image_url;
+    }
+
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
+    }
 
     public Date getUpdatedAt() {
         return updatedAt;

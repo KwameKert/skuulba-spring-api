@@ -1,8 +1,10 @@
 package com.condeinsyt.skuulba.service;
 
+import com.condeinsyt.skuulba.dto.SearchDTO;
 import com.condeinsyt.skuulba.model.Student;
 
 import java.util.HashMap;
+import java.util.Optional;
 
 public interface StudentService {
 
@@ -16,5 +18,8 @@ public interface StudentService {
 
     HashMap<String, Object> deleteStudent(Long studId);
     HashMap<String, Object> getStudentDetails(Long id);
-    HashMap<String, Object> searchStudentDetails();
+    HashMap<String, Object> searchStudentDetails(SearchDTO  value);
+    HashMap<String, Object> getStudentByClass(SearchDTO  value);
+
+    HashMap<String , Object> getStudentFinance(SearchDTO value);
 }

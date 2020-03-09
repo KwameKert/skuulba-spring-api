@@ -1,5 +1,6 @@
 package com.condeinsyt.skuulba.controller;
 
+import com.condeinsyt.skuulba.dto.SearchDTO;
 import com.condeinsyt.skuulba.model.Student;
 import com.condeinsyt.skuulba.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/student/")
@@ -40,6 +42,7 @@ public class StudentController {
 
     @PutMapping
     public ResponseEntity<?> updateStudent(@RequestBody Student student){
+
         return new ResponseEntity<>(this.studentService.updateStudent(student), HttpStatus.OK);
     }
 
@@ -51,9 +54,27 @@ public class StudentController {
 
     @GetMapping("studentDetails/{id}")
     public ResponseEntity<?> getStudentDetails(@PathVariable("id") Long id){
-        System.out.println( id);
+
         return new ResponseEntity<>(this.studentService.getStudentDetails(id),HttpStatus.OK);
     }
+
+
+    @PostMapping("search")
+    public ResponseEntity<?> getStudentSearch(@RequestBody SearchDTO values){
+        return new ResponseEntity<>(this.studentService.searchStudentDetails(values), HttpStatus.OK);
+    }
+
+    @PostMapping("class/")
+    public ResponseEntity<?> getClass(@RequestBody SearchDTO value){
+        return new ResponseEntity<>(this.studentService.getStudentByClass(value), HttpStatus.OK);
+    }
+
+
+    @PostMapping("/paramsearch/")
+    public ResponseEntity<?> searchStudentFinance(@RequestBody SearchDTO value){
+        return new ResponseEntity<>(this.studentService.getStudentFinance(value), HttpStatus.OK);
+    }
+
 
 
 }

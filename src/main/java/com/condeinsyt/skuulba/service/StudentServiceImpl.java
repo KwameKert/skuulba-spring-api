@@ -1,6 +1,7 @@
 package com.condeinsyt.skuulba.service;
 
 import com.condeinsyt.skuulba.dto.GetStudentDetailsDTO;
+import com.condeinsyt.skuulba.dto.SearchDTO;
 import com.condeinsyt.skuulba.model.*;
 import com.condeinsyt.skuulba.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,6 +74,8 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public HashMap<String, Object> updateStudent(Student student) {
+
+
         HashMap<String, Object> responseData = new HashMap<>();
 
         try{
@@ -231,14 +234,71 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public HashMap<String, Object> searchStudentDetails() {
+    public HashMap<String, Object> searchStudentDetails(SearchDTO values) {
+       System.out.println(values.getParam());
+        System.out.println(values.getValue());
         try{
-            List<Student> allStudents = studentRepository.findAll();
-            if(!allStudents.isEmpty()){
-                return responseAPI(null,"Student not found \uD83E\uDD7A",HttpStatus.NO_CONTENT);
-            }else{
-                return responseAPI(allStudents,"Students found \uD83D\uDE42",HttpStatus.OK);
+            if(values.getParam() == 1){
+                System.out.println("I'm here");
+                List<Student> foundStudents = studentRepository.findAllByLastNameLike(values.getValue());
+                System.out.println(foundStudents);
+                return responseAPI(foundStudents,"Students found \uD83D\uDE42",HttpStatus.OK);
+
+            }else if(values.getParam() == 2){
+                List<Student> foundStudents = studentRepository.findAllByOtherNamesLike(values.getValue());
+                return responseAPI(foundStudents,"Students found \uD83D\uDE42",HttpStatus.OK);
+
             }
+            return responseAPI(null,"Student not found \uD83E\uDD7A",HttpStatus.NO_CONTENT);
+
+        }catch(Exception e){
+            e.printStackTrace();
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
+    }
+
+    @Override
+    public HashMap<String, Object> getStudentByClass(SearchDTO values) {
+        System.out.println("IM here");
+        System.out.println(values.getValue().toLowerCase());
+        try{
+
+            List<Student> students = this.studentRepository.findAllByStudentClassLike(values.getValue().toLowerCase());
+
+            if(!students.isEmpty()){
+                return responseAPI(students,"Students found", HttpStatus.OK);
+            }else{
+                return responseAPI(null,"Students not found",HttpStatus.NO_CONTENT);
+            }
+
+        }catch(Exception e){
+            e.printStackTrace();
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
+    }
+
+    @Override
+    public HashMap<String, Object> getStudentFinance(SearchDTO value) {
+        try{
+            int param = value.getParam();
+            if(param == 1){
+                List<Student> students = this.studentRepository.findAllByStudentClassLike(value.getValue().toLowerCase());
+
+                if(!students.isEmpty()){
+                    return responseAPI(students,"Students found", HttpStatus.OK);
+                }else{
+                    return responseAPI(null,"Students not found",HttpStatus.NO_CONTENT);
+                }
+            }else{
+                List<Student> foundStudents = studentRepository.findAllByLastNameLike(value.getValue());
+                if(!foundStudents.isEmpty()){
+                    return responseAPI(foundStudents,"Students found", HttpStatus.OK);
+                }else{
+                    return responseAPI(null,"Students not found",HttpStatus.NO_CONTENT);
+                }
+
+            }
+
         }catch(Exception e){
             e.printStackTrace();
             return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
