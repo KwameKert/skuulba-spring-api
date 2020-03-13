@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface StudentRepository extends JpaRepository<Student, Long> {
 
+    List<Student> findAllByOrderByIdAsc();
     List<Student>  findAllByLastNameLike(String value);
 
     List<Student> findAllByOtherNamesLike(String value);

@@ -106,7 +106,7 @@ public class StudentServiceImpl implements StudentService {
     public HashMap<String, Object> listStudents() {
         HashMap<String, Object> responseData = new HashMap<>();
         try{
-            List<Student> studentList = studentRepository.findAll();
+            List<Student> studentList = studentRepository.findAllByOrderByIdAsc();
             //System.out.println(studentList.get(0).getDob());
             if(studentList.isEmpty()){
                 responseData.put("data", Collections.EMPTY_LIST);

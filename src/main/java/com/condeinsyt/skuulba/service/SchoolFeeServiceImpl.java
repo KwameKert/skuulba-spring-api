@@ -64,7 +64,7 @@ public class SchoolFeeServiceImpl implements  SchoolFeeService {
     public HashMap<String, Object> listSchoolFee() {
         try {
 
-            List<SchoolFee> student_schoolFees = this.schoolFeeRepository.findAll();
+            List<SchoolFee> student_schoolFees = this.schoolFeeRepository.findAllByOrderByIdAsc();
            // System.out.println(student_schoolFees.getStudent());
 
             if(!student_schoolFees.isEmpty()){

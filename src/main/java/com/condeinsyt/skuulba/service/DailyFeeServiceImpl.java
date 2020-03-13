@@ -64,7 +64,7 @@ public class DailyFeeServiceImpl implements DailyFeeService {
     @Override
     public HashMap<String, Object> listFees() {
         try{
-            List<DailyFees> allFees = this.dailyFeeRepository.findAll();
+            List<DailyFees> allFees = this.dailyFeeRepository.findAllByOrderByIdDesc();
 
             if(!allFees.isEmpty()){
                 return responseAPI(allFees, "Student Daily Fee found",HttpStatus.OK);
