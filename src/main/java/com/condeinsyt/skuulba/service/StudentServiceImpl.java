@@ -160,7 +160,7 @@ public class StudentServiceImpl implements StudentService {
         try{
 
             Optional<Student> studentFound = studentRepository.findById(studId);
-            System.out.println(studentFound);
+
             if(!studentFound.isPresent()){
                 responseData.put("data", Collections.EMPTY_LIST);
                 responseData.put("message","Student not found \uD83E\uDD7A");
