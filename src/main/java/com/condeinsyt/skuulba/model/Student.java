@@ -28,6 +28,7 @@ public class Student {
     private String livingWith;
     private Integer noSiblings;
     private Date dob;
+    private String status;
     private String studentClass;
     private String[] languages;
     private String religion;
@@ -56,6 +57,13 @@ public class Student {
     }
 
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public List<DailyFees> getDailyFees() {
         return dailyFees;

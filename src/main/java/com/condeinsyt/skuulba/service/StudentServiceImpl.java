@@ -106,7 +106,7 @@ public class StudentServiceImpl implements StudentService {
     public HashMap<String, Object> listStudents() {
         HashMap<String, Object> responseData = new HashMap<>();
         try{
-            List<Student> studentList = studentRepository.findAllByOrderByIdAsc();
+            List<Student> studentList = studentRepository.findAllByStatusOrderByIdAsc("active");
             //System.out.println(studentList.get(0).getDob());
             if(studentList.isEmpty()){
                 responseData.put("data", Collections.EMPTY_LIST);
@@ -160,14 +160,14 @@ public class StudentServiceImpl implements StudentService {
         try{
 
             Optional<Student> studentFound = studentRepository.findById(studId);
-
+            System.out.println(studentFound);
             if(!studentFound.isPresent()){
                 responseData.put("data", Collections.EMPTY_LIST);
                 responseData.put("message","Student not found \uD83E\uDD7A");
                 responseData.put("status",HttpStatus.NO_CONTENT.value());
                 return responseData;
             }
-            studentRepository.deleteById(studId);
+            studentRepository.UpdateStudentStatus(studId, "inactive");
             return listStudents();
         } catch(Exception e){
             e.printStackTrace();
