@@ -1,4 +1,4 @@
-package com.condeinsyt.skuulba.service;
+package com.condeinsyt.skuulba.service.impl;
 
 import com.condeinsyt.skuulba.model.User;
 import com.condeinsyt.skuulba.repository.AuthRepository;

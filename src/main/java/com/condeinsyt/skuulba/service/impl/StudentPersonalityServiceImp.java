@@ -1,11 +1,9 @@
-package com.condeinsyt.skuulba.service;
+package com.condeinsyt.skuulba.service.impl;
 
-import com.condeinsyt.skuulba.dto.Physicals;
-import com.condeinsyt.skuulba.dto.StudentPhysicalDTO;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.condeinsyt.skuulba.model.ArrayHolder;
-import com.condeinsyt.skuulba.model.StudentPhysical;
-import com.condeinsyt.skuulba.repository.StudentPhysicalRepository;
+import com.condeinsyt.skuulba.dto.StudentPersonalityDTO;
+import com.condeinsyt.skuulba.model.StudentPersonality;
+import com.condeinsyt.skuulba.repository.StudentPersonalityRepository;
+import com.condeinsyt.skuulba.service.interfaces.StudentPersonalityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -13,27 +11,28 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-public class StudentPhysicalServiceImpl implements StudentPhysicalService {
+public class StudentPersonalityServiceImp implements StudentPersonalityService {
 
-    private StudentPhysicalRepository studentPhysicalRepository;
+    private StudentPersonalityRepository studentPersonalityRepository;
 
     @Autowired
-    public StudentPhysicalServiceImpl(StudentPhysicalRepository studentPhysicalRepository){
-        this.studentPhysicalRepository = studentPhysicalRepository;
+    public StudentPersonalityServiceImp(StudentPersonalityRepository studentPersonalityRepository){
+        this.studentPersonalityRepository = studentPersonalityRepository;
     }
 
+
     @Override
-    public HashMap<String, Object> createPhysical(StudentPhysicalDTO studentPhysical) {
+    public HashMap<String, Object> createPersonality(StudentPersonalityDTO studentPersonalityDTO) {
         HashMap<String, Object> responseData = new HashMap<>();
 
-        ArrayList<StudentPhysical> content = studentPhysical.getPhysicals();
+        ArrayList<StudentPersonality> content = studentPersonalityDTO.getPersonalities();
 
         try{
-            for(StudentPhysical studentP : content){
-                StudentPhysical newStudentPhysical  = this.studentPhysicalRepository.save(studentP);
+            for(StudentPersonality studentP : content){
+                StudentPersonality newStudentPersonality  = this.studentPersonalityRepository.save(studentP);
             }
             responseData.put("data",null);
-            responseData.put("message","Physical Added to student");
+            responseData.put("message","Personality Added to student");
             responseData.put("status", HttpStatus.OK.value());
         }catch (Exception e){
             e.printStackTrace();
@@ -48,22 +47,22 @@ public class StudentPhysicalServiceImpl implements StudentPhysicalService {
     }
 
     @Override
-    public HashMap<String, Object> updatePhysical(StudentPhysical studentPhysical) {
+    public HashMap<String, Object> updatePersonality(StudentPersonality studentPersonality) {
         HashMap<String, Object> responseData = new HashMap<>();
 
         try{
-            Optional<StudentPhysical> studentPhysicalFound = studentPhysicalRepository.findById(studentPhysical.getId());
+            Optional<StudentPersonality> studentPersonalityFound = studentPersonalityRepository.findById(studentPersonality.getId());
 
-            if(!studentPhysicalFound.isPresent()){
+            if(!studentPersonalityFound.isPresent()){
                 responseData.put("data", Collections.EMPTY_LIST);
-                responseData.put("message","No student physique found");
+                responseData.put("message","No student personality found");
                 responseData.put("status",HttpStatus.NO_CONTENT.value());
                 return responseData;
             }
 
-            StudentPhysical updatedStudent  = studentPhysicalRepository.save(studentPhysical);
+            StudentPersonality updatedStudent  = studentPersonalityRepository.save(studentPersonality);
             responseData.put("data",updatedStudent);
-            responseData.put("message","Student updated successfully");
+            responseData.put("message","Student Personality updated successfully");
             responseData.put("status",HttpStatus.OK.value());
         }catch (Exception e){
             e.printStackTrace();
@@ -76,22 +75,22 @@ public class StudentPhysicalServiceImpl implements StudentPhysicalService {
     }
 
     @Override
-    public HashMap<String, Object> deletePhysical(Long id) {
+    public HashMap<String, Object> deletePersonality(Long id) {
         HashMap<String, Object > responseData = new HashMap<>();
 
         try{
 
-            Optional<StudentPhysical> studentPhysicalFound = studentPhysicalRepository.findById(id);
-            Long studId = studentPhysicalFound.get().getStudentId();
+            Optional<StudentPersonality> studentPersonalityFound = studentPersonalityRepository.findById(id);
+            Long pId = studentPersonalityFound.get().getId();
 
-            if(!studentPhysicalFound.isPresent()){
+            if(!studentPersonalityFound.isPresent()){
                 responseData.put("data", Collections.EMPTY_LIST);
                 responseData.put("message","Student Physical not found \uD83E\uDD7A");
                 responseData.put("status",HttpStatus.NO_CONTENT.value());
                 return responseData;
             }
-            studentPhysicalRepository.deleteById(id);
-           return listStudentPhysical(studId);
+            studentPersonalityRepository.deleteById(id);
+            return findStudentPersonalityById(pId);
         } catch(Exception e){
             e.printStackTrace();
             responseData.put("data",null);
@@ -103,18 +102,18 @@ public class StudentPhysicalServiceImpl implements StudentPhysicalService {
     }
 
     @Override
-    public HashMap<String, Object> listStudentPhysical(Long id) {
+    public HashMap<String, Object> listStudentPersonality(Long id) {
         HashMap<String, Object> responseData = new HashMap<>();
         try {
-            List<StudentPhysical> studentPhysicalList = studentPhysicalRepository.findAllByStudentId(id);
-            if (studentPhysicalList.isEmpty()) {
+            List<StudentPersonality> studentPersonalityList = studentPersonalityRepository.findAllByStudentId(id);
+            if (studentPersonalityList.isEmpty()) {
                 responseData.put("data", Collections.EMPTY_LIST);
-                responseData.put("message", "Student physique not found \uD83E\uDD7A");
+                responseData.put("message", "Student personality found \uD83E\uDD7A");
                 responseData.put("status", HttpStatus.NO_CONTENT.value());
                 return responseData;
             }
-            responseData.put("data", studentPhysicalList);
-            responseData.put("message", "Student physique found \uD83D\uDE42");
+            responseData.put("data", studentPersonalityList);
+            responseData.put("message", "Student personality found \uD83D\uDE42");
             responseData.put("status", HttpStatus.OK.value());
         } catch (Exception e) {
             e.printStackTrace();
@@ -127,19 +126,19 @@ public class StudentPhysicalServiceImpl implements StudentPhysicalService {
     }
 
     @Override
-    public HashMap<String, Object> findStudentPhysicalById(Long id) {
+    public HashMap<String, Object> findStudentPersonalityById(Long id) {
         HashMap<String, Object> responseData = new HashMap<>();
 
-        Optional<StudentPhysical> foundStudentPhysical = studentPhysicalRepository.findById(id);
+        Optional<StudentPersonality> foundStudentPersonality = studentPersonalityRepository.findById(id);
         try{
-            if(!foundStudentPhysical.isPresent()){
+            if(!foundStudentPersonality.isPresent()){
                 responseData.put("data", Collections.EMPTY_LIST);
-                responseData.put("message","Student Physical not found \uD83E\uDD7A");
+                responseData.put("message","Student Personality not found \uD83E\uDD7A");
                 responseData.put("status",HttpStatus.NO_CONTENT.value());
                 return responseData;
             }
-            responseData.put("data",foundStudentPhysical);
-            responseData.put("message","Student Physical found \uD83D\uDE42");
+            responseData.put("data",foundStudentPersonality);
+            responseData.put("message","Student Personality found \uD83D\uDE42");
             responseData.put("status",HttpStatus.OK.value());
         }catch (Exception e){
             e.printStackTrace();

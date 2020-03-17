@@ -1,13 +1,12 @@
-package com.condeinsyt.skuulba.service;
+package com.condeinsyt.skuulba.service.impl;
 
-import com.condeinsyt.skuulba.model.Student;
 import com.condeinsyt.skuulba.model.StudentParent;
 import com.condeinsyt.skuulba.repository.StudentParentRepository;
+import com.condeinsyt.skuulba.service.interfaces.StudentParentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import javax.swing.tree.ExpandVetoException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;

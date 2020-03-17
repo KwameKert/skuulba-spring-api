@@ -1,10 +1,11 @@
-package com.condeinsyt.skuulba.service;
+package com.condeinsyt.skuulba.service.impl;
 
 import com.condeinsyt.skuulba.dto.DailyFeeDTO;
 import com.condeinsyt.skuulba.model.DailyFees;
 import com.condeinsyt.skuulba.model.Student;
 import com.condeinsyt.skuulba.repository.DailyFeeRepository;
 import com.condeinsyt.skuulba.repository.StudentRepository;
+import com.condeinsyt.skuulba.service.interfaces.DailyFeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

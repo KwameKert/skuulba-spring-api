@@ -1,8 +1,9 @@
-package com.condeinsyt.skuulba.service;
+package com.condeinsyt.skuulba.service.impl;
 
 import com.condeinsyt.skuulba.dto.StudentAwardDTO;
 import com.condeinsyt.skuulba.model.StudentAward;
 import com.condeinsyt.skuulba.repository.StudentAwardRepository;
+import com.condeinsyt.skuulba.service.interfaces.StudentAwardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

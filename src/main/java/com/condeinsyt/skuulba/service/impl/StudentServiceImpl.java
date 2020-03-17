@@ -1,9 +1,10 @@
-package com.condeinsyt.skuulba.service;
+package com.condeinsyt.skuulba.service.impl;
 
 import com.condeinsyt.skuulba.dto.GetStudentDetailsDTO;
 import com.condeinsyt.skuulba.dto.SearchDTO;
 import com.condeinsyt.skuulba.model.*;
 import com.condeinsyt.skuulba.repository.*;
+import com.condeinsyt.skuulba.service.interfaces.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

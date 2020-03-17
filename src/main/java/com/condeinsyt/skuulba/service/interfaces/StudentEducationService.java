@@ -1,4 +1,4 @@
-package com.condeinsyt.skuulba.service;
+package com.condeinsyt.skuulba.service.interfaces;
 
 import com.condeinsyt.skuulba.dto.StudentEducationDTO;
 import com.condeinsyt.skuulba.model.StudentEducation;

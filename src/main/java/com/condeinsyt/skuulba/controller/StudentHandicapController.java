@@ -3,7 +3,7 @@ package com.condeinsyt.skuulba.controller;
 
 import com.condeinsyt.skuulba.dto.StudentHandicapDTO;
 import com.condeinsyt.skuulba.model.StudentHandicap;
-import com.condeinsyt.skuulba.service.StudentHandicapService;
+import com.condeinsyt.skuulba.service.interfaces.StudentHandicapService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

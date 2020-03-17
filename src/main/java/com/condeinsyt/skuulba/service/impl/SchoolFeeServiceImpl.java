@@ -1,23 +1,22 @@
-package com.condeinsyt.skuulba.service;
+package com.condeinsyt.skuulba.service.impl;
 
 import com.condeinsyt.skuulba.dto.SchoolFeeDTO;
 import com.condeinsyt.skuulba.dto.SearchDTO;
-import com.condeinsyt.skuulba.dto.StudentSchoolFeeHolder;
 import com.condeinsyt.skuulba.model.SchoolFee;
 import com.condeinsyt.skuulba.model.Student;
 import com.condeinsyt.skuulba.repository.SchoolFeeRepository;
 import com.condeinsyt.skuulba.repository.StudentRepository;
+import com.condeinsyt.skuulba.service.interfaces.SchoolFeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class SchoolFeeServiceImpl implements  SchoolFeeService {
+public class SchoolFeeServiceImpl implements SchoolFeeService {
 
     private SchoolFeeRepository schoolFeeRepository;
     private StudentRepository studentRepository;

@@ -2,9 +2,7 @@ package com.condeinsyt.skuulba.controller;
 
 
 import com.condeinsyt.skuulba.dto.SchoolFeeDTO;
-import com.condeinsyt.skuulba.dto.SearchDTO;
-import com.condeinsyt.skuulba.model.SchoolFee;
-import com.condeinsyt.skuulba.service.SchoolFeeService;
+import com.condeinsyt.skuulba.service.interfaces.SchoolFeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

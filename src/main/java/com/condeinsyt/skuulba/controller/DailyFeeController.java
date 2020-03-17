@@ -1,8 +1,7 @@
 package com.condeinsyt.skuulba.controller;
 
 import com.condeinsyt.skuulba.dto.DailyFeeDTO;
-import com.condeinsyt.skuulba.model.DailyFees;
-import com.condeinsyt.skuulba.service.DailyFeeService;
+import com.condeinsyt.skuulba.service.interfaces.DailyFeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

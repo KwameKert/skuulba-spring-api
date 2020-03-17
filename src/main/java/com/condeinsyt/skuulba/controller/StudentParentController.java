@@ -2,7 +2,7 @@ package com.condeinsyt.skuulba.controller;
 
 
 import com.condeinsyt.skuulba.model.StudentParent;
-import com.condeinsyt.skuulba.service.StudentParentService;
+import com.condeinsyt.skuulba.service.interfaces.StudentParentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

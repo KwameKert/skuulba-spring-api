@@ -1,7 +1,8 @@
-package com.condeinsyt.skuulba.service;
+package com.condeinsyt.skuulba.service.impl;
 
 import com.condeinsyt.skuulba.model.StudentHealth;
 import com.condeinsyt.skuulba.repository.StudentHealthRepository;
+import com.condeinsyt.skuulba.service.interfaces.StudentHealthService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
