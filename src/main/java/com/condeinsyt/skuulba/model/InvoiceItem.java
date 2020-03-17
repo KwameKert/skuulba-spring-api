@@ -2,6 +2,7 @@ package com.condeinsyt.skuulba.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -17,6 +18,9 @@ public class InvoiceItem {
     private int quantity;
     private int rate;
     private int amount;
+
+    @CreationTimestamp
+    private Date createdAt;
 
     @UpdateTimestamp
     private Date updatedAt;

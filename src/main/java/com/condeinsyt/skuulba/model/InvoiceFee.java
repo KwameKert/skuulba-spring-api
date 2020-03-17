@@ -1,6 +1,7 @@
 package com.condeinsyt.skuulba.model;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.sql.Blob;
@@ -18,11 +19,14 @@ public class InvoiceFee {
     private Date billDate;
     private Date billDueDate;
     private int amount;
+    private String status;
     private Blob notes;
     private Blob terms;
 
     @CreationTimestamp
     private Date createdAt;
+    @UpdateTimestamp
+    private Date updatedAt;
 
     @OneToMany(mappedBy = "invoice", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
