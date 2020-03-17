@@ -33,7 +33,6 @@ public class Student {
     private String[] languages;
     private String religion;
     private String gender;
-    private int age;
 
     private String image_url;
     @CreationTimestamp
