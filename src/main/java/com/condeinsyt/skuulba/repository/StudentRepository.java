@@ -11,8 +11,6 @@ import java.util.List;
 
 public interface StudentRepository extends JpaRepository<Student, Long> {
 
-//    @Query("UPDATE app_student s SET s.status = 'inactive' WHERE s.id = :studentId")
-//    int updateStatus(@Param("studentId") Long studentId);
    @Modifying(clearAutomatically = true)
     @Query("UPDATE Student s SET s.status = ?2 WHERE s.id = ?1")
    @Transactional

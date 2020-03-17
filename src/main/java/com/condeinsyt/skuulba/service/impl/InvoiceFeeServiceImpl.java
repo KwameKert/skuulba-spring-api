@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -58,7 +59,17 @@ public class InvoiceFeeServiceImpl implements InvoiceFeeService {
 
     @Override
     public HashMap<String, Object> listInvoice() {
-        return null;
+        try{
+            List<InvoiceFee> invoices = this.invoiceFeeRepository.findAllByStatusOrderByIdDesc("active");
+
+            if(invoices.isEmpty()){
+                return responseAPI(null, "No invoices found",HttpStatus.NO_CONTENT);
+            }
+
+            return responseAPI(invoices,"Invoices Found",HttpStatus.OK);
+        }catch(Exception e){
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
     }
 
     @Override
