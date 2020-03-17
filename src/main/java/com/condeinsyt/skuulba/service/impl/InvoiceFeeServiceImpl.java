@@ -65,7 +65,6 @@ public class InvoiceFeeServiceImpl implements InvoiceFeeService {
             if(invoices.isEmpty()){
                 return responseAPI(null, "No invoices found",HttpStatus.NO_CONTENT);
             }
-
             return responseAPI(invoices,"Invoices Found",HttpStatus.OK);
         }catch(Exception e){
             return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
@@ -74,11 +73,31 @@ public class InvoiceFeeServiceImpl implements InvoiceFeeService {
 
     @Override
     public HashMap<String, Object> getInvoice(Long id) {
-        return null;
+        try{
+            Optional<InvoiceFee> invoiceFound = this.invoiceFeeRepository.findById(id);
+
+            if(!invoiceFound.isPresent()) {
+                return responseAPI(null, "No invoice found", HttpStatus.NO_CONTENT);
+            }
+            return responseAPI(invoiceFound,"Invoice found ",HttpStatus.OK);
+
+        }catch(Exception e){
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
+
     }
 
     @Override
     public HashMap<String, Object> softDeleteInvoice(Long id) {
-        return null;
+        try{
+            Optional<InvoiceFee> invoiceFound = this.invoiceFeeRepository.findById(id);
+            if(!invoiceFound.isPresent()) {
+                return responseAPI(null, "No invoice found", HttpStatus.NO_CONTENT);
+            }
+            this.invoiceFeeRepository.UpdateInvoiceStatus(id,"inactive");
+           return this.listInvoice();
+        }catch(Exception e){
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
     }
 }
