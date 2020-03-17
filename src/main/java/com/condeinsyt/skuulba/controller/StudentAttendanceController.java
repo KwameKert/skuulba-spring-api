@@ -1,7 +1,7 @@
 package com.condeinsyt.skuulba.controller;
 
 import com.condeinsyt.skuulba.dto.StudentAttendanceDTO;
-import com.condeinsyt.skuulba.service.StudentAttendanceService;
+import com.condeinsyt.skuulba.service.interfaces.StudentAttendanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -2,7 +2,7 @@ package com.condeinsyt.skuulba.controller;
 
 
 import com.condeinsyt.skuulba.dto.StudentEducationDTO;
-import com.condeinsyt.skuulba.service.StudentEducationService;
+import com.condeinsyt.skuulba.service.interfaces.StudentEducationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

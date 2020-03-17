@@ -2,7 +2,7 @@ package com.condeinsyt.skuulba.controller;
 
 import com.condeinsyt.skuulba.dto.StudentTalentsDTO;
 import com.condeinsyt.skuulba.model.StudentTalent;
-import com.condeinsyt.skuulba.service.StudentTalentService;
+import com.condeinsyt.skuulba.service.interfaces.StudentTalentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

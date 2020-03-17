@@ -2,14 +2,13 @@ package com.condeinsyt.skuulba.controller;
 
 import com.condeinsyt.skuulba.dto.SearchDTO;
 import com.condeinsyt.skuulba.model.Student;
-import com.condeinsyt.skuulba.service.StudentService;
+import com.condeinsyt.skuulba.service.interfaces.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/student/")
@@ -47,7 +46,7 @@ public class StudentController {
     }
 
 
-    @DeleteMapping("{id}")
+    @GetMapping("delete/{id}")
     public ResponseEntity<?> deleteStudent(@PathVariable("id") Long id){
       return new ResponseEntity<>(this.studentService.deleteStudent(id), HttpStatus.OK);
     }

@@ -10,4 +10,5 @@ public interface StudentTalentRepository extends JpaRepository<StudentTalent, Lo
     List<StudentTalent> findAllByStudentId(Long id);
 
 
+
 }

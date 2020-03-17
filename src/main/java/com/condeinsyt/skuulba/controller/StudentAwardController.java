@@ -3,7 +3,7 @@ package com.condeinsyt.skuulba.controller;
 
 import com.condeinsyt.skuulba.dto.StudentAwardDTO;
 import com.condeinsyt.skuulba.model.StudentAward;
-import com.condeinsyt.skuulba.service.StudentAwardService;
+import com.condeinsyt.skuulba.service.interfaces.StudentAwardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

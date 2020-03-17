@@ -1,8 +1,7 @@
 package com.condeinsyt.skuulba.controller;
 
 import com.condeinsyt.skuulba.model.User;
-import com.condeinsyt.skuulba.service.UserService;
-import com.condeinsyt.skuulba.service.UserServiceImpl;
+import com.condeinsyt.skuulba.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

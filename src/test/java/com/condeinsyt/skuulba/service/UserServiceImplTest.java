@@ -2,6 +2,7 @@ package com.condeinsyt.skuulba.service;
 
 import com.condeinsyt.skuulba.model.User;
 import com.condeinsyt.skuulba.repository.UserRepository;
+import com.condeinsyt.skuulba.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
