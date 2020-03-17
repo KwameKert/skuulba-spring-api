@@ -5,12 +5,10 @@ import com.condeinsyt.skuulba.dto.InvoiceDTO;
 import com.condeinsyt.skuulba.service.impl.InvoiceFeeServiceImpl;
 import com.condeinsyt.skuulba.service.interfaces.InvoiceFeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -28,13 +26,21 @@ public class InvoiceController {
 
 
     @PostMapping
-    public ResponseEntity<?> payStudentFee(@Valid @RequestBody InvoiceDTO invoiceDTO) {
+    public ResponseEntity<?> generateInvoice(@Valid @RequestBody InvoiceDTO invoiceDTO) {
         //System.out.println(studentPhysical.length);
         return new ResponseEntity<>(invoiceFeeService.createInvoice(invoiceDTO), HttpStatus.OK);
     }
 
+    @GetMapping
+    public ResponseEntity<?> listInvoices(){
+        return new ResponseEntity<>(invoiceFeeService.listInvoice(),HttpStatus.OK);
+    }
 
 
+    @GetMapping("{id}")
+    public ResponseEntity<?> getInvoice(@Valid  @PathVariable("id") Long id){
+        return new ResponseEntity<>(invoiceFeeService.getInvoice(id),HttpStatus.OK);
+    }
 
 
 

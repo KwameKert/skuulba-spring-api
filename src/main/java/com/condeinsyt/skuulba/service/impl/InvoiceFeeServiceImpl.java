@@ -6,6 +6,7 @@ import com.condeinsyt.skuulba.model.InvoiceItem;
 import com.condeinsyt.skuulba.repository.InvoiceFeeRepository;
 import com.condeinsyt.skuulba.repository.InvoiceItemRepository;
 import com.condeinsyt.skuulba.service.interfaces.InvoiceFeeService;
+import com.condeinsyt.skuulba.service.interfaces.InvoiceItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -19,12 +20,12 @@ import java.util.Optional;
 public class InvoiceFeeServiceImpl implements InvoiceFeeService {
 
     private InvoiceFeeRepository invoiceFeeRepository;
-    private InvoiceItemRepository invoiceItemRepository;
+    private InvoiceItemService invoiceItemService;
 
     @Autowired
-    public InvoiceFeeServiceImpl(InvoiceFeeRepository invoiceFeeRepository, InvoiceItemRepository invoiceItemRepository) {
+    public InvoiceFeeServiceImpl(InvoiceFeeRepository invoiceFeeRepository, InvoiceItemService invoiceItemService) {
         this.invoiceFeeRepository = invoiceFeeRepository;
-        this.invoiceItemRepository = invoiceItemRepository;
+        this.invoiceItemService = invoiceItemService;
     }
 
     public HashMap<String, Object> responseAPI(Object data, String message, HttpStatus status){
@@ -49,21 +50,17 @@ public class InvoiceFeeServiceImpl implements InvoiceFeeService {
             invoice.setStatus("active");
             Invoice savedInvoice = this.invoiceFeeRepository.save(invoice);
 
-            //Optional<Invoice> inv = this.invoiceFeeRepository.findById(savedInvoice.getId());
-          //  System.out.println(inv);
-//            System.out.println(savedInvoice);
-//            System.out.println(invoiceDTO.getInvoiceItems());
-
             for(InvoiceItem invoiceItem: invoiceDTO.getInvoiceItems()){
                 InvoiceItem newItem = new InvoiceItem();
                 newItem.setInvoice(savedInvoice);
                 newItem.setAmount(invoiceItem.getAmount());
                 newItem.setName(invoiceItem.getName());
+                newItem.setStatus("active");
                 newItem.setRate(invoiceItem.getRate());
                 newItem.setQuantity(invoiceItem.getQuantity());
                 System.out.println(newItem);
 
-                this.invoiceItemRepository.save(newItem);
+                this.invoiceItemService.createItem(newItem);
             }
             return responseAPI(savedInvoice,"Invoice saved successfully",HttpStatus.OK);
 
@@ -111,6 +108,7 @@ public class InvoiceFeeServiceImpl implements InvoiceFeeService {
             if(!invoiceFound.isPresent()) {
                 return responseAPI(null, "No invoice found", HttpStatus.NO_CONTENT);
             }
+
             return responseAPI(invoiceFound,"Invoice found ",HttpStatus.OK);
 
         }catch(Exception e){

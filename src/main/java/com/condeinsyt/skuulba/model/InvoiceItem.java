@@ -20,6 +20,8 @@ public class InvoiceItem implements Serializable {
     private int rate;
     private int amount;
 
+    private String status;
+
     @CreationTimestamp
     private Date createdAt;
 
@@ -29,6 +31,14 @@ public class InvoiceItem implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "invoice_id", nullable = false)
     private Invoice invoice;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public Long getId() {
         return id;
