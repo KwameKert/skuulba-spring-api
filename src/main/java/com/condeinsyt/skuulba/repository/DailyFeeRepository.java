@@ -21,7 +21,7 @@ public interface DailyFeeRepository extends JpaRepository<DailyFees,Long> {
             "app_student.`status`\n" +
             "FROM\n" +
             "app_student\n" +
-            "INNER JOIN app_student_daily_fees ON app_student_daily_fees.student_id = app_student.id WHERE app_student.status='active'", nativeQuery = true)
+            "INNER JOIN app_student_daily_fees ON app_student_daily_fees.student_id = app_student.id WHERE app_student.status='active' ORDER BY app_student_daily_fees.id desc", nativeQuery = true)
     List<DailyFees> findActiveDailyPayments();
     List<DailyFees> findAllByOrderByIdDesc();
 }
