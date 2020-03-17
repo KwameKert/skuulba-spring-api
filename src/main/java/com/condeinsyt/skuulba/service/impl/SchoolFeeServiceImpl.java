@@ -50,6 +50,7 @@ public class SchoolFeeServiceImpl implements SchoolFeeService {
             schoolFee.setStudent(foundStudent.get());
             schoolFee.setAmount(schoolFeeDTO.getAmount());
 
+            System.out.println("This is school fees \n" + schoolFee);
 
             SchoolFee paidFee = this.schoolFeeRepository.save(schoolFee);
             return responseAPI(paidFee, "Student school fee paid",HttpStatus.OK);

@@ -4,13 +4,12 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.sql.Blob;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name="app_invoice_fee")
-public class InvoiceFee {
+public class Invoice {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,8 +20,10 @@ public class InvoiceFee {
     private Date billDueDate;
     private int amount;
     private String status;
-    private Blob notes;
-    private Blob terms;
+    @Lob
+    private String notes;
+    @Lob
+    private String terms;
 
     @CreationTimestamp
     private Date createdAt;
@@ -33,6 +34,9 @@ public class InvoiceFee {
             cascade = CascadeType.ALL)
     List<InvoiceItem> invoiceItems;
 
+
+    public Invoice() {
+    }
 
     public String getValue() {
         return value;
@@ -98,19 +102,19 @@ public class InvoiceFee {
         this.amount = amount;
     }
 
-    public Blob getNotes() {
+    public String getNotes() {
         return notes;
     }
 
-    public void setNotes(Blob notes) {
+    public void setNotes(String notes) {
         this.notes = notes;
     }
 
-    public Blob getTerms() {
+    public String getTerms() {
         return terms;
     }
 
-    public void setTerms(Blob terms) {
+    public void setTerms(String terms) {
         this.terms = terms;
     }
 
@@ -128,5 +132,23 @@ public class InvoiceFee {
 
     public void setInvoiceItems(List<InvoiceItem> invoiceItems) {
         this.invoiceItems = invoiceItems;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Invoice{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", value='" + value + '\'' +
+                ", billDate=" + billDate +
+                ", billDueDate=" + billDueDate +
+                ", amount=" + amount +
+                ", status='" + status + '\'' +
+                ", notes='" + notes + '\'' +
+                ", terms='" + terms + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
     }
 }

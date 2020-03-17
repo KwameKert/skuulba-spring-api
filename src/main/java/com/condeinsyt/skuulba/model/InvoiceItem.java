@@ -6,11 +6,12 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name="app_invoice_item")
-public class InvoiceItem {
+@Table(name="app_invoice_fee_item")
+public class InvoiceItem implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -25,9 +26,9 @@ public class InvoiceItem {
     @UpdateTimestamp
     private Date updatedAt;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "invoice_id", nullable = false)
-    private InvoiceFee invoiceFee;
+    private Invoice invoice;
 
     public Long getId() {
         return id;
@@ -76,13 +77,29 @@ public class InvoiceItem {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
+
     @JsonIgnore
-    public InvoiceFee getInvoiceFee() {
-        return invoiceFee;
+    public Invoice getInvoice() {
+        return invoice;
     }
 
     @JsonIgnore
-    public void setInvoiceFee(InvoiceFee invoiceFee) {
-        this.invoiceFee = invoiceFee;
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
+    }
+
+
+    @Override
+    public String toString() {
+        return "InvoiceItem{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", quantity=" + quantity +
+                ", rate=" + rate +
+                ", amount=" + amount +
+                ", invoice=" + invoice +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
     }
 }

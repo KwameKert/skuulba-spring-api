@@ -86,4 +86,19 @@ public class SchoolFee implements Serializable {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+
+    @Override
+    public String toString() {
+        return "SchoolFee{" +
+                "id=" + id +
+                ", amount=" + amount +
+                ", fullName='" + fullName + '\'' +
+                ", studentClass='" + studentClass + '\'' +
+                ", gender='" + gender + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", student=" + student +
+                '}';
+    }
 }

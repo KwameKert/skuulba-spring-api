@@ -2,7 +2,6 @@ package com.condeinsyt.skuulba.dto;
 
 import com.condeinsyt.skuulba.model.InvoiceItem;
 
-import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -15,8 +14,24 @@ public class InvoiceDTO {
     private Date billDueDate;
     private int amount;
     private String status;
-    private Blob notes;
-    private Blob terms;
+    private String notes;
+    private String terms;
+
+
+    public InvoiceDTO(ArrayList<InvoiceItem> invoiceItems, String type, String value, Date billDate, Date billDueDate, int amount, String status, String notes, String terms) {
+        this.invoiceItems = invoiceItems;
+        this.type = type;
+        this.value = value;
+        this.billDate = billDate;
+        this.billDueDate = billDueDate;
+        this.amount = amount;
+        this.status = status;
+        this.notes = notes;
+        this.terms = terms;
+    }
+
+    public InvoiceDTO() {
+    }
 
     public ArrayList<InvoiceItem> getInvoiceItems() {
         return invoiceItems;
@@ -74,19 +89,19 @@ public class InvoiceDTO {
         this.status = status;
     }
 
-    public Blob getNotes() {
+    public String getNotes() {
         return notes;
     }
 
-    public void setNotes(Blob notes) {
+    public void setNotes(String notes) {
         this.notes = notes;
     }
 
-    public Blob getTerms() {
+    public String getTerms() {
         return terms;
     }
 
-    public void setTerms(Blob terms) {
+    public void setTerms(String terms) {
         this.terms = terms;
     }
 }
