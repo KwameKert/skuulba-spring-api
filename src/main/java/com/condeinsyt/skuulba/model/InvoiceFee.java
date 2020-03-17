@@ -33,6 +33,31 @@ public class InvoiceFee {
             cascade = CascadeType.ALL)
     List<InvoiceItem> invoiceItems;
 
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
     public Long getId() {
         return id;
     }
