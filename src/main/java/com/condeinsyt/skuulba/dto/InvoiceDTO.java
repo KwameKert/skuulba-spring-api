@@ -1,20 +1,14 @@
-package com.condeinsyt.skuulba.model;
+package com.condeinsyt.skuulba.dto;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import com.condeinsyt.skuulba.model.InvoiceItem;
 
-import javax.persistence.*;
 import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-@Entity
-@Table(name="app_invoice_fee")
-public class InvoiceFee {
+public class InvoiceDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private ArrayList<InvoiceItem> invoiceItems;
     private String type;
     private String value;
     private Date billDate;
@@ -24,21 +18,12 @@ public class InvoiceFee {
     private Blob notes;
     private Blob terms;
 
-    @CreationTimestamp
-    private Date createdAt;
-    @UpdateTimestamp
-    private Date updatedAt;
-
-    @OneToMany(mappedBy = "invoice", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
-    List<InvoiceItem> invoiceItems;
-
-    public Long getId() {
-        return id;
+    public ArrayList<InvoiceItem> getInvoiceItems() {
+        return invoiceItems;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setInvoiceItems(ArrayList<InvoiceItem> invoiceItems) {
+        this.invoiceItems = invoiceItems;
     }
 
     public String getType() {
@@ -47,6 +32,14 @@ public class InvoiceFee {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public Date getBillDate() {
@@ -73,6 +66,14 @@ public class InvoiceFee {
         this.amount = amount;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public Blob getNotes() {
         return notes;
     }
@@ -87,21 +88,5 @@ public class InvoiceFee {
 
     public void setTerms(Blob terms) {
         this.terms = terms;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public List<InvoiceItem> getInvoiceItems() {
-        return invoiceItems;
-    }
-
-    public void setInvoiceItems(List<InvoiceItem> invoiceItems) {
-        this.invoiceItems = invoiceItems;
     }
 }
