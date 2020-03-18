@@ -1,6 +1,7 @@
 package com.condeinsyt.skuulba.dto;
 
 import com.condeinsyt.skuulba.model.InvoiceItem;
+import com.condeinsyt.skuulba.model.Student;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,6 +9,7 @@ import java.util.Date;
 public class InvoiceDTO {
 
     private ArrayList<InvoiceItem> invoiceItems;
+    private ArrayList<Student> student;
     private String type;
     private String value;
     private Date billDate;
@@ -99,6 +101,14 @@ public class InvoiceDTO {
 
     public String getTerms() {
         return terms;
+    }
+
+    public ArrayList<Student> getStudent() {
+        return student;
+    }
+
+    public void setStudent(ArrayList<Student> student) {
+        this.student = student;
     }
 
     public void setTerms(String terms) {

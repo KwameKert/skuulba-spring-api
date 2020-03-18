@@ -51,10 +51,22 @@ public class Student {
             cascade = CascadeType.ALL)
     private List<DailyFees> dailyFees;
 
+    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private List<Invoice> invoices;
+
 
     public Student() {
     }
 
+
+    public List<Invoice> getInvoices() {
+        return invoices;
+    }
+
+    public void setInvoices(List<Invoice> invoices) {
+        this.invoices = invoices;
+    }
 
     public String getStatus() {
         return status;

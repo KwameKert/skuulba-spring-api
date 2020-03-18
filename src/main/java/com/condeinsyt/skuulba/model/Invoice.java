@@ -1,5 +1,6 @@
 package com.condeinsyt.skuulba.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -14,6 +15,7 @@ public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String code;
     private String type;
     private String value;
     private Date billDate;
@@ -34,8 +36,21 @@ public class Invoice {
             cascade = CascadeType.ALL)
     List<InvoiceItem> invoiceItems;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "student_id", nullable = false)
+    @JsonIgnore
+    private Student student;
+
 
     public Invoice() {
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getValue() {
@@ -134,6 +149,13 @@ public class Invoice {
         this.invoiceItems = invoiceItems;
     }
 
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
 
     @Override
     public String toString() {
