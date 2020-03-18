@@ -1,8 +1,10 @@
 package com.condeinsyt.skuulba.service.interfaces;
 
+import com.condeinsyt.skuulba.model.Invoice;
 import com.condeinsyt.skuulba.model.InvoiceItem;
 
 import java.util.HashMap;
+import java.util.List;
 
 public interface InvoiceItemService {
 
@@ -13,5 +15,5 @@ public interface InvoiceItemService {
 
     HashMap<String, Object> softDeleteItem(Long id);
 
-    HashMap<String, Object>  listItemsForInvoice(Long id);
+    List<InvoiceItem> listItemsForInvoice(Invoice invoice);
 }
