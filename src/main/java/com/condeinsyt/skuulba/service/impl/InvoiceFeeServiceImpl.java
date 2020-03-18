@@ -3,6 +3,7 @@ package com.condeinsyt.skuulba.service.impl;
 import com.condeinsyt.skuulba.dto.InvoiceDTO;
 import com.condeinsyt.skuulba.model.Invoice;
 import com.condeinsyt.skuulba.model.InvoiceItem;
+import com.condeinsyt.skuulba.model.Student;
 import com.condeinsyt.skuulba.repository.InvoiceFeeRepository;
 import com.condeinsyt.skuulba.repository.InvoiceItemRepository;
 import com.condeinsyt.skuulba.service.interfaces.InvoiceFeeService;
@@ -38,34 +39,39 @@ public class InvoiceFeeServiceImpl implements InvoiceFeeService {
     }
     @Override
     public HashMap<String, Object> createInvoice(InvoiceDTO invoiceDTO) {
+
         try{
-            Invoice invoice = new Invoice();
-            invoice.setType(invoiceDTO.getType());
-            invoice.setAmount(invoiceDTO.getAmount());
-            invoice.setBillDate(invoiceDTO.getBillDate());
-            invoice.setBillDueDate(invoiceDTO.getBillDueDate());
-            invoice.setNotes(invoiceDTO.getNotes());
-            invoice.setTerms(invoiceDTO.getTerms());
-            invoice.setValue(invoiceDTO.getValue());
-            invoice.setStatus("active");
-            Invoice savedInvoice = this.invoiceFeeRepository.save(invoice);
+            for (Student student: invoiceDTO.getStudents()){
+                Invoice invoice = new Invoice();
+                invoice.setType(invoiceDTO.getType());
+                invoice.setAmount(invoiceDTO.getAmount());
+                invoice.setBillDate(invoiceDTO.getBillDate());
+                invoice.setBillDueDate(invoiceDTO.getBillDueDate());
+                invoice.setNotes(invoiceDTO.getNotes());
+                invoice.setTerms(invoiceDTO.getTerms());
+                invoice.setStudent(student);
+                invoice.setValue(invoiceDTO.getValue());
+                invoice.setStatus("active");
+                Invoice savedInvoice = this.invoiceFeeRepository.save(invoice);
 
-            for(InvoiceItem invoiceItem: invoiceDTO.getInvoiceItems()){
-                InvoiceItem newItem = new InvoiceItem();
-                newItem.setInvoice(savedInvoice);
-                newItem.setAmount(invoiceItem.getAmount());
-                newItem.setName(invoiceItem.getName());
-                newItem.setStatus("active");
-                newItem.setRate(invoiceItem.getRate());
-                newItem.setQuantity(invoiceItem.getQuantity());
-                System.out.println(newItem);
+                for(InvoiceItem invoiceItem: invoiceDTO.getInvoiceItems()){
+                    InvoiceItem newItem = new InvoiceItem();
+                    newItem.setInvoice(savedInvoice);
+                    newItem.setAmount(invoiceItem.getAmount());
+                    newItem.setName(invoiceItem.getName());
+                    newItem.setStatus("active");
+                    newItem.setRate(invoiceItem.getRate());
+                    newItem.setQuantity(invoiceItem.getQuantity());
+                    System.out.println(newItem);
 
-                this.invoiceItemService.createItem(newItem);
+                    this.invoiceItemService.createItem(newItem);
+                }
             }
-            return responseAPI(savedInvoice,"Invoice saved successfully",HttpStatus.OK);
+
+            return responseAPI(null,"Invoice saved successfully",HttpStatus.OK);
 
         }catch(Exception e){
-            return responseAPI(null,e.getMessage(),HttpStatus.NO_CONTENT);
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
         }
 
     }

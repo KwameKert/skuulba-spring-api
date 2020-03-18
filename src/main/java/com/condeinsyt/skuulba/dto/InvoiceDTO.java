@@ -8,8 +8,8 @@ import java.util.Date;
 
 public class InvoiceDTO {
 
-    private ArrayList<InvoiceItem> invoiceItems;
-    private ArrayList<Student> student;
+    private ArrayList<InvoiceItem> items;
+    private ArrayList<Student> students;
     private String type;
     private String value;
     private Date billDate;
@@ -21,7 +21,7 @@ public class InvoiceDTO {
 
 
     public InvoiceDTO(ArrayList<InvoiceItem> invoiceItems, String type, String value, Date billDate, Date billDueDate, int amount, String status, String notes, String terms) {
-        this.invoiceItems = invoiceItems;
+        this.items = invoiceItems;
         this.type = type;
         this.value = value;
         this.billDate = billDate;
@@ -36,11 +36,11 @@ public class InvoiceDTO {
     }
 
     public ArrayList<InvoiceItem> getInvoiceItems() {
-        return invoiceItems;
+        return items;
     }
 
-    public void setInvoiceItems(ArrayList<InvoiceItem> invoiceItems) {
-        this.invoiceItems = invoiceItems;
+    public void setInvoiceItems(ArrayList<InvoiceItem> items) {
+        this.items = items;
     }
 
     public String getType() {
@@ -103,12 +103,20 @@ public class InvoiceDTO {
         return terms;
     }
 
-    public ArrayList<Student> getStudent() {
-        return student;
+    public ArrayList<InvoiceItem> getItems() {
+        return items;
     }
 
-    public void setStudent(ArrayList<Student> student) {
-        this.student = student;
+    public void setItems(ArrayList<InvoiceItem> items) {
+        this.items = items;
+    }
+
+    public ArrayList<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(ArrayList<Student> students) {
+        this.students = students;
     }
 
     public void setTerms(String terms) {
