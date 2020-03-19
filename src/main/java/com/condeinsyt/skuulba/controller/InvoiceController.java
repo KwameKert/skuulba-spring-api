@@ -27,7 +27,7 @@ public class InvoiceController {
 
     @PostMapping
     public ResponseEntity<?> generateInvoice(@Valid @RequestBody InvoiceDTO invoiceDTO) {
-        //System.out.println(studentPhysical.length);
+
         return new ResponseEntity<>(invoiceFeeService.createInvoice(invoiceDTO), HttpStatus.OK);
     }
 

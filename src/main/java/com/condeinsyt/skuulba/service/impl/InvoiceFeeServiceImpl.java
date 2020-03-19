@@ -6,8 +6,10 @@ import com.condeinsyt.skuulba.model.InvoiceItem;
 import com.condeinsyt.skuulba.model.Student;
 import com.condeinsyt.skuulba.repository.InvoiceFeeRepository;
 import com.condeinsyt.skuulba.repository.InvoiceItemRepository;
+import com.condeinsyt.skuulba.repository.StudentRepository;
 import com.condeinsyt.skuulba.service.interfaces.InvoiceFeeService;
 import com.condeinsyt.skuulba.service.interfaces.InvoiceItemService;
+import com.condeinsyt.skuulba.service.interfaces.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -22,11 +24,13 @@ public class InvoiceFeeServiceImpl implements InvoiceFeeService {
 
     private InvoiceFeeRepository invoiceFeeRepository;
     private InvoiceItemService invoiceItemService;
+    private StudentRepository studentRepository;
 
     @Autowired
-    public InvoiceFeeServiceImpl(InvoiceFeeRepository invoiceFeeRepository, InvoiceItemService invoiceItemService) {
+    public InvoiceFeeServiceImpl(InvoiceFeeRepository invoiceFeeRepository, InvoiceItemService invoiceItemService, StudentRepository studentRepository) {
         this.invoiceFeeRepository = invoiceFeeRepository;
         this.invoiceItemService = invoiceItemService;
+        this.studentRepository = studentRepository;
     }
 
     public HashMap<String, Object> responseAPI(Object data, String message, HttpStatus status){
@@ -41,15 +45,17 @@ public class InvoiceFeeServiceImpl implements InvoiceFeeService {
     public HashMap<String, Object> createInvoice(InvoiceDTO invoiceDTO) {
 
         try{
-            for (Student student: invoiceDTO.getStudents()){
+            for (Long  studId: invoiceDTO.getStudents()){
+                Optional<Student> student = this.studentRepository.findById(studId);
                 Invoice invoice = new Invoice();
                 invoice.setType(invoiceDTO.getType());
                 invoice.setAmount(invoiceDTO.getAmount());
                 invoice.setBillDate(invoiceDTO.getBillDate());
                 invoice.setBillDueDate(invoiceDTO.getBillDueDate());
                 invoice.setNotes(invoiceDTO.getNotes());
+                invoice.setCode(invoiceDTO.getCode());
                 invoice.setTerms(invoiceDTO.getTerms());
-                invoice.setStudent(student);
+                invoice.setStudent(student.get());
                 invoice.setValue(invoiceDTO.getValue());
                 invoice.setStatus("active");
                 Invoice savedInvoice = this.invoiceFeeRepository.save(invoice);
@@ -71,6 +77,7 @@ public class InvoiceFeeServiceImpl implements InvoiceFeeService {
             return responseAPI(null,"Invoice saved successfully",HttpStatus.OK);
 
         }catch(Exception e){
+            e.printStackTrace();
             return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
         }
 

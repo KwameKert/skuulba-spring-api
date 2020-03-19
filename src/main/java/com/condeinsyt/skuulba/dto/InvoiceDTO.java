@@ -9,7 +9,7 @@ import java.util.Date;
 public class InvoiceDTO {
 
     private ArrayList<InvoiceItem> items;
-    private ArrayList<Student> students;
+    private ArrayList<Long> students;
     private String type;
     private String value;
     private Date billDate;
@@ -18,6 +18,7 @@ public class InvoiceDTO {
     private String status;
     private String notes;
     private String terms;
+    private String code;
 
 
     public InvoiceDTO(ArrayList<InvoiceItem> invoiceItems, String type, String value, Date billDate, Date billDueDate, int amount, String status, String notes, String terms) {
@@ -33,6 +34,14 @@ public class InvoiceDTO {
     }
 
     public InvoiceDTO() {
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public ArrayList<InvoiceItem> getInvoiceItems() {
@@ -111,11 +120,11 @@ public class InvoiceDTO {
         this.items = items;
     }
 
-    public ArrayList<Student> getStudents() {
+    public ArrayList<Long> getStudents() {
         return students;
     }
 
-    public void setStudents(ArrayList<Student> students) {
+    public void setStudents(ArrayList<Long> students) {
         this.students = students;
     }
 
