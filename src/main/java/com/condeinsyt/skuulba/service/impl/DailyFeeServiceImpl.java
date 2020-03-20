@@ -79,4 +79,16 @@ public class DailyFeeServiceImpl implements DailyFeeService {
 
         }
     }
+
+    @Override
+    public HashMap<String, Object> listStudentDailyFee(Long id) {
+        Optional<Student> student = this.studentRepository.findById(id);
+        List<DailyFees> dailyFees = this.dailyFeeRepository.findAllByStudent(student.get());
+
+        if(!dailyFees.isEmpty()){
+            return responseAPI(dailyFees, "Student Daily Fee found",HttpStatus.OK);
+        }
+
+        return responseAPI(null, "Student daily fee empty",HttpStatus.NO_CONTENT);
+    }
 }

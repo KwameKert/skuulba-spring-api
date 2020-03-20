@@ -15,4 +15,7 @@ public interface SchoolFeeService {
     HashMap<String, Object> listSchoolFeeByStudentClass(SearchDTO studentClass);
 
     HashMap<String, Object> listSchoolFeeByFullName(String name);
+
+
+    HashMap<String, Object> listStudentSchoolFees(Long id);
 }
