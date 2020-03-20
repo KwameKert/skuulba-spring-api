@@ -1,6 +1,7 @@
 package com.condeinsyt.skuulba.repository;
 
 import com.condeinsyt.skuulba.model.DailyFees;
+import com.condeinsyt.skuulba.model.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -24,4 +25,6 @@ public interface DailyFeeRepository extends JpaRepository<DailyFees,Long> {
             "INNER JOIN app_student_daily_fees ON app_student_daily_fees.student_id = app_student.id WHERE app_student.status='active' ORDER BY app_student_daily_fees.id desc", nativeQuery = true)
     List<DailyFees> findActiveDailyPayments();
     List<DailyFees> findAllByOrderByIdDesc();
+
+    List<DailyFees> findAllByStudent(Student student);
 }

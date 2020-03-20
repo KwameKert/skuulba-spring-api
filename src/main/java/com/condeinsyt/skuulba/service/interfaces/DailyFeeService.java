@@ -10,4 +10,6 @@ public interface DailyFeeService {
     HashMap<String, Object> addFee(DailyFeeDTO dailyFeeDTO );
 
     HashMap<String, Object> listFees();
+
+    HashMap<String, Object> listStudentDailyFee(Long id);
 }

@@ -34,11 +34,12 @@ public class SchoolFeeController {
         return new ResponseEntity<>(schoolFeeService.listSchoolFee(), HttpStatus.OK);
     }
 
-//    @PostMapping("search/")
-//    public ResponseEntity<?> listSchoolFeeByStudentId(@Valid @RequestBody SearchDTO searchDTO) {
-//        //System.out.println(studentPhysical.length);
-//        return new ResponseEntity<>(schoolFeeService.listSchoolFeeByStudentClass(searchDTO), HttpStatus.OK);
-//    }
+    @GetMapping("/student/{id}")
+    public ResponseEntity<?> listStudentSchoolFee(@PathVariable("id") Long id) {
+        //System.out.println(studentPhysical.length);
+        return new ResponseEntity<>(schoolFeeService.listStudentSchoolFees(id), HttpStatus.OK);
+    }
+
 
 
 

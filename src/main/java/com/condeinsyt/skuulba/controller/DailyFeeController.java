@@ -31,6 +31,14 @@ public class DailyFeeController {
         return new ResponseEntity<>(dailyFeeService.listFees(), HttpStatus.OK);
     }
 
+    @GetMapping("student/{id}")
+    public ResponseEntity<?> listStudentDailyFee(@PathVariable("id") Long id){
+        return new ResponseEntity<>(dailyFeeService.listStudentDailyFee(id), HttpStatus.OK);
+
+    }
+
+
+
 
 
 }
