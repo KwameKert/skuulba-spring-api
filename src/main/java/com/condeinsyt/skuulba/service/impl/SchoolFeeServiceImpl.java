@@ -112,5 +112,23 @@ public class SchoolFeeServiceImpl implements SchoolFeeService {
         return null;
     }
 
+    @Override
+    public HashMap<String, Object> listStudentSchoolFees(Long id) {
+        try{
+            Optional<Student> student = this.studentRepository.findById(id);
+
+            List<SchoolFee> schoolFees = this.schoolFeeRepository.findAllByStudent(student.get());
+
+            if(!schoolFees.isEmpty()){
+                return responseAPI(schoolFees,"Students found",HttpStatus.OK);
+            }
+            return this.responseAPI(null,"Students  not Found",HttpStatus.NO_CONTENT);
+
+
+        }catch(Exception e){
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
+    }
+
 
 }
