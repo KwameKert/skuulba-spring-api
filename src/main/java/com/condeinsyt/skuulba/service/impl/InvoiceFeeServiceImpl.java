@@ -143,4 +143,9 @@ public class InvoiceFeeServiceImpl implements InvoiceFeeService {
             return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
         }
     }
+
+    @Override
+    public HashMap<String, Object> listStudentDailyFee(Long id) {
+        return null;
+    }
 }
