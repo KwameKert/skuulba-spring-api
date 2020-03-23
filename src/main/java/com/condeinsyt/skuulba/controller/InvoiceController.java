@@ -43,8 +43,8 @@ public class InvoiceController {
     }
 
     @GetMapping("student/{id}")
-    public ResponseEntity<?> listStudentDailyFee(@PathVariable("id") Long id){
-        return new ResponseEntity<>(dailyFeeService.listStudentDailyFee(id), HttpStatus.OK);
+    public ResponseEntity<?> listStudentInvoice(@PathVariable("id") Long id){
+        return new ResponseEntity<>(invoiceFeeService.listStudentInvoiceFee(id), HttpStatus.OK);
 
     }
 
