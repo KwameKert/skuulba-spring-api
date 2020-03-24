@@ -2,6 +2,7 @@ package com.condeinsyt.skuulba.repository;
 
 
 import com.condeinsyt.skuulba.model.Invoice;
+import com.condeinsyt.skuulba.model.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -17,4 +18,6 @@ public interface InvoiceFeeRepository extends JpaRepository<Invoice, Long> {
     int UpdateInvoiceStatus(Long invoiceId, String status);
 
     List<Invoice> findAllByStatusOrderByIdDesc(String status);
+
+    List<Invoice> findAllByStudent(Student student);
 }

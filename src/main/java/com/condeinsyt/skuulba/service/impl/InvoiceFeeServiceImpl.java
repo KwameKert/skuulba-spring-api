@@ -143,4 +143,23 @@ public class InvoiceFeeServiceImpl implements InvoiceFeeService {
             return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
         }
     }
+
+    @Override
+    public HashMap<String, Object> listStudentDailyFee(Long id) {
+        try{
+            Optional<Student> student = this.studentRepository.findById(id);
+
+            if(student.isPresent()){
+
+                List<Invoice> invoices = this.invoiceFeeRepository.findAllByStudent(student.get());
+                return responseAPI(invoices, "Invoices found", HttpStatus.OK);
+            }
+
+            return responseAPI(null, "No invoice found", HttpStatus.NO_CONTENT);
+
+
+        }catch(Exception e){
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
+    }
 }
