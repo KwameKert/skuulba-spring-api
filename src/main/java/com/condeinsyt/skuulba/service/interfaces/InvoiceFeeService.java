@@ -13,7 +13,6 @@ public interface InvoiceFeeService {
     HashMap<String, Object> listInvoice();
     HashMap<String, Object> getInvoice(Long id);
     HashMap<String, Object> softDeleteInvoice(Long id);
-    HashMap<String, Object> listStudentDailyFee(Long id);
-
+   // HashMap<String, Object> listStudentDailyFee(Long id);
 
 }
