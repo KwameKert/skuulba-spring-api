@@ -1,12 +1,22 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/skuulba?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-    username: root
-    password:
+    url: jdbc:postgresql://localhost:5432/skuulba
+    #url: jdbc:postgresql://localhost:5432/credentialTest
+    username: postgres
+    password: kwamepass
+
+
 
   jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
     show-sql: true
+    generate-ddl: true
 
+
+  flyway:
+    baselineOnMigrate : true
 

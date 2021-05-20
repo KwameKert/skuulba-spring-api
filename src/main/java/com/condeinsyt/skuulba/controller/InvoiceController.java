@@ -44,7 +44,7 @@ public class InvoiceController {
 
     @GetMapping("student/{id}")
     public ResponseEntity<?> listStudentInvoice(@PathVariable("id") Long id){
-        return new ResponseEntity<>(invoiceFeeService.listStudentInvoiceFee(id), HttpStatus.OK);
+        return new ResponseEntity<>(invoiceFeeService.listStudentDailyFee(id), HttpStatus.OK);
 
     }
 
