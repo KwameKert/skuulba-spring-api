@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/skuulba
+    #url: jdbc:postgresql://localhost:5432/credentialTest
+    username: postgres
+    password: kwamepass
+
+
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    generate-ddl: true
+
+
+  flyway:
+    baselineOnMigrate : true
+

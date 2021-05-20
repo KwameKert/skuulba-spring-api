@@ -42,11 +42,13 @@ public class InvoiceController {
         return new ResponseEntity<>(invoiceFeeService.getInvoice(id),HttpStatus.OK);
     }
 
-    @GetMapping("student/{id}")
-    public ResponseEntity<?> listStudentInvoice(@PathVariable("id") Long id){
-        return new ResponseEntity<>(invoiceFeeService.listStudentInvoiceFee(id), HttpStatus.OK);
 
-    }
+//
+//    @GetMapping("student/{id}")
+//    public ResponseEntity<?> listStudentInvoice(@PathVariable("id") Long id){
+//        return new ResponseEntity<>(invoiceFeeService.listStudentDailyFee(id), HttpStatus.OK);
+//
+//    }
 
 
 
